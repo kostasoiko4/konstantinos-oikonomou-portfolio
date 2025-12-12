@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import codingImage from "@/assets/profile-coding.png";
+import heroImage from "@/assets/profile-hero.png";
 
 export const ExperienceSection = () => {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ export const ExperienceSection = () => {
       {/* Background Image */}
       <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 hidden lg:block">
         <img 
-          src={codingImage} 
+          src={heroImage} 
           alt="" 
           className="w-full h-full object-cover"
         />

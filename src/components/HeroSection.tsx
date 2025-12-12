@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
-import heroImage from "@/assets/profile-hero.png";
+import heroImage from "@/assets/profile-presentation.png";
 
 export const HeroSection = () => {
   const { t } = useTranslation();
