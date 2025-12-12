@@ -10,7 +10,7 @@ export const Footer = () => {
   return (
     <footer id="contact" className="relative py-20 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-1">
         <img 
           src={handshakeImage} 
           alt="" 
@@ -28,7 +28,7 @@ export const Footer = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">
-            Let's Build Something Great
+            {t("footer.title")}
           </h2>
           <p className="text-lg text-muted-foreground">
             {t("footer.tagline")}

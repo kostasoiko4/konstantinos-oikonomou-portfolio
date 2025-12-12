@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
-import heroImage from "@/assets/profile-presentation.png";
+import heroImage from "@/assets/profile-coding.png";
 
 export const HeroSection = () => {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ export const HeroSection = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 mb-6"
             >
               <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
-              <span className="text-sm text-gold font-medium">Available for Projects</span>
+              <span className="text-sm text-gold font-medium">{t("hero.tag")}</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">

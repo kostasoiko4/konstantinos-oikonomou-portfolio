@@ -11,6 +11,7 @@ export const translations = {
         contact: "Contact",
       },
       hero: {
+        tag: "Available for projects",
         headline: "Frontend Engineer & Solutions Architect",
         subhead: "Delivering scalable React applications for the Public Sector, Enterprise, and Startups.",
         cta: {
@@ -84,16 +85,16 @@ export const translations = {
         viewAll: "View full library on GitHub",
         repos: {
           repo1: {
-            title: "react-dashboard-kit",
-            description: "A modular React dashboard starter with Ant Design, Redux Toolkit, and TypeScript support.",
+            title: "street-sign-recognition-cfnn",
+            description: "An AI recognition system written in Python3, able to recognise street signs",
           },
           repo2: {
-            title: "rn-navigation-patterns",
-            description: "React Native navigation patterns and best practices with smooth animations.",
+            title: "yugioh-memory-card-game",
+            description: "A fun memory game based on the famous Yu-Gi-Oh! card game, built with Java",
           },
           repo3: {
-            title: "ts-utility-helpers",
-            description: "TypeScript utility functions for common data transformations and validations.",
+            title: "vue-quasar-reservation-app-client",
+            description: "A Reservation app example build with Vue/Quasar",
           },
         },
       },
@@ -140,7 +141,8 @@ export const translations = {
         interests: "Beyond code, I'm passionate about music, Brazilian Jiu-Jitsu, and the art of homebrewing. These pursuits teach patience, precision, and the value of continuous improvement—qualities I bring to every project.",
       },
       footer: {
-        tagline: "Building the future of digital public services",
+        title: "Let's Build Something Great",
+        tagline: "Building the future of digital services",
         location: "Thessaloniki, Greece",
         rights: "All rights reserved.",
       },
@@ -158,6 +160,7 @@ export const translations = {
         contact: "Επικοινωνία",
       },
       hero: {
+        tag: "Διαθέσιμος για Έργα",
         headline: "Frontend Engineer & Solutions Architect",
         subhead: "Παροχή επεκτάσιμων React εφαρμογών για τον Δημόσιο Τομέα, Επιχειρήσεις και Startups.",
         cta: {
@@ -231,16 +234,16 @@ export const translations = {
         viewAll: "Δείτε όλη τη βιβλιοθήκη στο GitHub",
         repos: {
           repo1: {
-            title: "react-dashboard-kit",
-            description: "Modular React dashboard starter με Ant Design, Redux Toolkit και υποστήριξη TypeScript.",
+            title: "street-sign-recognition-cfnn",
+            description: "Ενα σύστημα τεχνιτής νοημοσύνης, ικανό να αναγνωρίσει πινακίδες οδικής κυκλοφορίας",
           },
           repo2: {
-            title: "rn-navigation-patterns",
-            description: "React Native navigation patterns και best practices με ομαλά animations.",
+            title: "yugioh-memory-card-game",
+            description: "Ένα ευχάριστο παιχνίδι μνήμης βασισμένο στο διάσιμο παιχνίδι Yu-Gi-Oh!, φτιαγμένο με Java",
           },
           repo3: {
-            title: "ts-utility-helpers",
-            description: "TypeScript utility functions για κοινούς μετασχηματισμούς δεδομένων και validations.",
+            title: "vue-quasar-reservation-app-client",
+            description: "Ένα παράδειγμα εφαρμογής κρατήσεων βασισμένο σε Vue/Quasar",
           },
         },
       },
@@ -287,7 +290,8 @@ export const translations = {
         interests: "Πέρα από τον κώδικα, είμαι παθιασμένος με τη μουσική, το Brazilian Jiu-Jitsu και την τέχνη του homebrewing. Αυτές οι ασχολίες διδάσκουν υπομονή, ακρίβεια και την αξία της συνεχούς βελτίωσης—ποιότητες που φέρνω σε κάθε έργο.",
       },
       footer: {
-        tagline: "Χτίζοντας το μέλλον των ψηφιακών δημόσιων υπηρεσιών",
+        title: "Ας χτίσουμε κάτι εξερετικό",
+        tagline: "Χτίζοντας το μέλλον των ψηφιακών υπηρεσιών",
         location: "Θεσσαλονίκη, Ελλάδα",
         rights: "Με επιφύλαξη παντός δικαιώματος.",
       },
