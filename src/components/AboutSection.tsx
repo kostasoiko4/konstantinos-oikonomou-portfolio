@@ -68,6 +68,7 @@ export const AboutSection = () => {
                 <BlockLabel icon={GraduationCap}>{t("about.educationLabel")}</BlockLabel>
                 <p className="font-semibold text-foreground">{t("about.degree")}</p>
                 <p className="text-sm text-gold">{t("about.university")}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{t("about.specialisation")}</p>
                 <a
                   href={THESIS_URL}
                   target="_blank"

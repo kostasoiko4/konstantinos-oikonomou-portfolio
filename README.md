@@ -36,6 +36,8 @@ public/
   og-image.jpg                  link preview image (1200x630)
   Konstantinos-Oikonomou-CV.pdf downloadable CV: replace the file, keep the name
   404.html                      real 404 page served by Firebase
+cv/
+  Konstantinos-Oikonomou-CV.html  source of the CV PDF
 ```
 
 Text content lives in `src/i18n/translations.ts`. Both languages share the same keys.
@@ -57,6 +59,25 @@ Text content lives in `src/i18n/translations.ts`. Both languages share the same 
 
 After deploying, submit `https://oikonomou-portfolio.web.app/sitemap.xml` in Google Search Console
 and Bing Webmaster Tools.
+
+## CV
+
+`public/Konstantinos-Oikonomou-CV.pdf` is printed from `cv/Konstantinos-Oikonomou-CV.html`.
+It is styled but still built for applicant tracking systems: one reading order (no side columns), standard
+section headings, selectable text, no tables, photo or text inside images. The header band, icons and timeline
+are decoration only. Keep it to two A4 pages, keep letter-spacing small and avoid `position` in its CSS: both
+scramble the text that parsers extract.
+
+To regenerate it, edit the HTML and print it with Chrome (Git Bash, from the project root):
+
+```sh
+"C:/Program Files/Google/Chrome/Application/chrome.exe" --headless=new --no-pdf-header-footer   --virtual-time-budget=15000 --print-to-pdf="$(pwd -W)/public/Konstantinos-Oikonomou-CV.pdf"   "file:///$(pwd -W)/cv/Konstantinos-Oikonomou-CV.html"
+```
+
+Or open the HTML in Chrome, then Print > Save as PDF (A4, default margins, "Background graphics" on,
+"Headers and footers" off). Keep the file name, since the site links to it, then rebuild and deploy.
+The download links carry a fingerprint of the file (`?v=...`, computed in `vite.config.ts`), so visitors
+get the new CV right away instead of a cached copy.
 
 ## Deploy
 

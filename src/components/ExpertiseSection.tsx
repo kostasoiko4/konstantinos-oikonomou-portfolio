@@ -11,7 +11,7 @@ const groups = [
   },
   { key: "backend", icon: Server, items: ["Node.js", "Express.js", "PostgreSQL", "PostGIS", "MongoDB", "Firebase", "SQL"] },
   { key: "mobile", icon: Smartphone, items: ["React Native", "Redux Toolkit", "Android Studio"] },
-  { key: "workflow", icon: GitBranch, items: ["Git", "Monorepos", "Docker", "Postman", "pgAdmin", "PM² Agile"] },
+  { key: "workflow", icon: GitBranch, items: ["Git", "Monorepos", "Docker", "Jira", "Postman", "pgAdmin", "PM² Agile"] },
   {
     key: "other",
     icon: Layers,

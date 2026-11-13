@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ArrowRight, Check, Copy, FileDown, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { Eyebrow, Reveal } from "./Section";
-import { CV_URL, EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
+import { CV_FILENAME, CV_URL, EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -69,7 +69,7 @@ export const Footer = () => {
               <Github size={15} />
               GitHub
             </a>
-            <a href={CV_URL} download className={linkClass}>
+            <a href={CV_URL} download={CV_FILENAME} className={linkClass}>
               <FileDown size={15} />
               {t("hero.cta.secondary")}
             </a>

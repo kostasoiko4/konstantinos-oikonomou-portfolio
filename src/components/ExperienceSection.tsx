@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { FileDown } from "lucide-react";
 import { Reveal, SectionHeader } from "./Section";
-import { CV_URL } from "@/lib/site";
+import { CV_FILENAME, CV_URL } from "@/lib/site";
 
 type Role = { key: string; stack: string[]; current?: boolean };
 
@@ -50,7 +50,7 @@ export const ExperienceSection = () => {
           />
           <a
             href={CV_URL}
-            download
+            download={CV_FILENAME}
             className="mb-12 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-gold md:mb-14"
           >
             <FileDown size={16} className="text-gold" />

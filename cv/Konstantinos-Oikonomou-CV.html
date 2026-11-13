@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Konstantinos Oikonomou | Frontend &amp; Full-Stack Engineer | CV</title>
+<meta name="author" content="Konstantinos Oikonomou">
+<meta name="description" content="CV of Konstantinos Oikonomou, Frontend & Full-Stack Engineer">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<!--
+  Source of public/Konstantinos-Oikonomou-CV.pdf.
+  Styled, but still readable by applicant tracking systems: one reading order (no side columns),
+  standard section headings, real selectable text, no tables, no text inside images.
+  Decoration (header band, icons, timeline, rules) is CSS or inline SVG and carries no text.
+  When editing: keep letter-spacing at 0.05em or less (wider spacing is read as "S U M M A R Y"),
+  and don't use position: relative/absolute (positioned boxes are written out of order in the PDF).
+  Keep it to two A4 pages. To regenerate the PDF, see "CV" in README.md.
+-->
+<style>
+  :root {
+    --ink: #1b1b1d;
+    --text: #2b2b2e;
+    --muted: #5d5d63;
+    --rule: #e4ddcc;
+    --band: #141414;
+    --gold: #c9a240;        /* site gold, used on the dark band */
+    --gold-text: #8f6f1f;   /* darker gold for text on white */
+  }
+  @page { size: A4; margin: 12mm 0 11mm; }
+  @page :first { margin-top: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    padding: 0 15mm;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 9.2pt;
+    line-height: 1.38;
+    color: var(--text);
+    /* Ligatures off so the extracted text stays clean ("fi", "fl"...) */
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
+  }
+  a { color: inherit; text-decoration: none; }
+  b { font-weight: 600; color: var(--ink); }
+
+  /* Header band */
+  .band {
+    margin: 0 -15mm;
+    padding: 10mm 15mm 7.5mm;
+    background:
+      linear-gradient(90deg, #7a5b17, #e8cb78 35%, #b58d33 65%, #f0d78f 85%, #8a6a1c) left bottom / 100% 2.2pt no-repeat,
+      var(--band);
+    color: #d9d9d9;
+  }
+  h1 {
+    font-size: 24pt; font-weight: 800; line-height: 1.05;
+    letter-spacing: 0.045em; text-transform: uppercase; color: #fff;
+  }
+  h1 .last { color: var(--gold); }
+  .headline {
+    margin-top: 4pt; font-size: 10.5pt; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase; color: #f1e6c8;
+  }
+  .contact { margin-top: 7pt; font-size: 8.6pt; line-height: 1.7; color: #d4d4d4; }
+  .contact span { white-space: nowrap; margin-right: 9pt; }
+  .ic {
+    width: 8.5pt; height: 8.5pt; margin-right: 3pt; vertical-align: -1.2pt;
+    fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* Sections */
+  section { margin-top: 9pt; }
+  h2 {
+    display: flex; align-items: center; gap: 6pt;
+    margin-bottom: 5pt;
+    font-size: 10.5pt; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink);
+    break-after: avoid;
+  }
+  h2::before { content: ""; flex: none; width: 11pt; height: 2.4pt; background: var(--gold); }
+  h2::after { content: ""; flex: 1; height: 0.6pt; background: var(--rule); }
+  p + p { margin-top: 2.5pt; }
+
+  .skills p { margin-top: 1.5pt; }
+
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  .dates { flex: none; font-size: 8.6pt; font-weight: 500; color: var(--muted); white-space: nowrap; }
+  ul { margin: 2pt 0 0 12pt; }
+  li { margin-top: 1pt; padding-left: 1pt; }
+  li::marker { color: var(--gold); }
+  .muted { color: var(--muted); }
+  .sep { color: #a7a7ad; margin: 0 2pt; }
+  .link { text-decoration: underline; text-decoration-color: #cdbd93; text-decoration-thickness: 0.5pt; text-underline-offset: 1.5pt; }
+
+  /* Experience timeline: decoration only, the text stays in one column */
+  .timeline { margin-left: 3pt; }
+  .company { padding: 0 0 6pt 13pt; border-left: 1pt solid var(--rule); }
+  .company:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .company-name::before {
+    content: ""; box-sizing: border-box; display: inline-block; vertical-align: 0.2pt;
+    width: 8.4pt; height: 8.4pt; margin: 0 9.3pt 0 -17.7pt; border-radius: 50%;
+    background: #fff; border: 1.6pt solid var(--gold);
+  }
+  .company > .row, .role > .row { break-after: avoid; }
+  .company-name { font-size: 10.2pt; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); }
+  .company-dates { flex: none; font-size: 8.6pt; font-weight: 600; color: var(--gold-text); white-space: nowrap; }
+  .role { margin-top: 3pt; }
+  li { break-inside: avoid; }
+  .role-title { font-weight: 600; color: var(--ink); }
+
+  .projects li { margin-top: 2pt; }
+
+  .entry { margin-top: 4pt; break-inside: avoid; }
+  .entry:first-of-type { margin-top: 0; }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <h1>Konstantinos <span class="last">Oikonomou</span></h1>
+  <p class="headline">Frontend &amp; Full-Stack Engineer</p>
+  <p class="contact">
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Thessaloniki, Greece</span>
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+306987802777">+30 698 780 2777</a></span>
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><a href="mailto:kostasoikonomou4@gmail.com">kostasoikonomou4@gmail.com</a></span>
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><a href="https://oikonomou-portfolio.web.app">oikonomou-portfolio.web.app</a></span>
+    <br>
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg><a href="https://www.linkedin.com/in/konstantinos-oikonomou-a5a2b3225/">linkedin.com/in/konstantinos-oikonomou-a5a2b3225</a></span>
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg><a href="https://github.com/kostasoiko4">github.com/kostasoiko4</a></span>
+  </p>
+</header>
+
+<section>
+  <h2>Summary</h2>
+  <p>
+    Frontend &amp; Full-Stack Engineer with 4+ years of experience building web platforms for municipalities,
+    research institutions and public bodies. Specialised in React.js, TypeScript and Next.js, with full-stack delivery
+    on Node.js, PostgreSQL and PostGIS. Led the move to a monorepo architecture serving 10 municipal installations,
+    re-architected an interoperability platform as a full-stack Next.js application, and contributed to 20+ live
+    deployments across 15+ Greek municipalities. BSc in Computer Science (Artificial Intelligence), PM² Agile certified.
+  </p>
+</section>
+
+<section class="skills">
+  <h2>Technical Skills</h2>
+  <p><b>Frontend &amp; Mobile:</b> React.js (React 19), Next.js (App Router), TypeScript, JavaScript (ES6+), Redux Toolkit, React Router, React Native, HTML5, CSS3, Tailwind CSS, Ant Design, Bootstrap, Vite</p>
+  <p><b>Backend &amp; Data:</b> Node.js, Express.js, REST APIs, PostgreSQL, PostGIS, MongoDB, Firebase, SQL, Zod</p>
+  <p><b>Maps &amp; Data Visualisation:</b> Leaflet, MapLibre GL, Chart.js, Recharts, GIS</p>
+  <p><b>Testing &amp; Quality:</b> Vitest (unit testing), Playwright (end-to-end testing), ESLint</p>
+  <p><b>Tools &amp; Workflow:</b> Git, Bitbucket, Jira, Docker, Docker Compose, nginx, Postman, pgAdmin, Keycloak (SSO)</p>
+  <p><b>Architecture &amp; Practices:</b> Monorepo and multi-tenant (white-label) architecture, i18n, Agile (PM²), requirements analysis, team coordination, mentoring</p>
+  <p><b>AI &amp; Machine Learning:</b> Python, PyTorch, TensorFlow, deep reinforcement learning, world models, CNNs, computer vision</p>
+  <p><b>Additional:</b> Vue.js, Quasar, Angular.js, Java, C, C++</p>
+</section>
+
+<section>
+  <h2>Professional Experience</h2>
+
+  <div class="timeline">
+    <div class="company">
+      <div class="row"><span class="company-name">Dotsoft</span><span class="company-dates">May 2024 - Present</span></div>
+
+      <div class="role">
+        <div class="row"><span class="role-title">Senior Developer</span><span class="dates">2026 - Present</span></div>
+        <ul>
+          <li>Led the transition from one codebase per installation to a monorepo architecture (npm workspaces, shared Vite configuration), now serving 10 municipal installations across Sync2myCity, City Events and Act4myCity, delivered under very strict deadlines.</li>
+          <li>Redesigned and re-architected the KED interoperability platform end to end as a full-stack Next.js and TypeScript application: PostgreSQL/PostGIS data model, data API for external providers, and Vitest unit and Playwright end-to-end tests.</li>
+          <li>Coordinated part of the KED Patras team under a very tight deadline, breaking a complex codebase into well-scoped tasks and presenting the platform at the client review.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="row"><span class="role-title">Mid-Senior Developer</span><span class="dates">May 2025 - 2026</span></div>
+        <ul>
+          <li>Delivered the EKT open data platform (data.ekt.gr) for the National Documentation Centre: a fully custom React 19 interface with no UI library, CKAN API integration and a Node.js proxy layer, setting the approach for later projects.</li>
+          <li>Delivered citizen-facing municipal platforms, including a volunteering network (Act4myCity) and real-time seismic monitoring with public alerts (Tremor Watch, Trikala).</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="row"><span class="role-title">Mid-Level Developer</span><span class="dates">May 2024 - May 2025</span></div>
+        <ul>
+          <li>Developed and maintained web applications for public bodies, including the Academy of Athens, the Region of Central Macedonia and the Azerbaijan Ministry of Ecology and Natural Resources (FAO).</li>
+          <li>Built digital repositories, research centre websites and administration panels with React, Redux Toolkit, Bootstrap and Ant Design, including interactive Leaflet maps.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="company">
+      <div class="row"><span class="company-name">Weblogic</span><span class="company-dates">Sep 2022 - May 2024</span></div>
+
+      <div class="role">
+        <div class="row"><span class="role-title">Lead Developer</span><span class="dates">Jun 2023 - May 2024</span></div>
+        <ul>
+          <li>Led front-end development of three React Native mobile apps (Bus Driver, Bus Passenger, Hotel Booking) with Redux Toolkit.</li>
+          <li>Translated customer requirements into scoped tasks, distributed the workload across the team, onboarded and mentored new developers, and owned version control and quality assurance.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="row"><span class="role-title">Frontend Developer</span><span class="dates">Sep 2022 - May 2024</span></div>
+        <ul>
+          <li>Developed a chatbot builder platform for hotels and travel agencies with React, Redux and Bootstrap.</li>
+          <li>Built the embeddable chat window widget and its specialised components, translating business requirements into platform updates.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="company">
+      <div class="row"><span><span class="company-name">Instashop</span><span class="sep">|</span><span class="role-title">Full Stack Engineer</span></span><span class="company-dates">Jan 2022 - Mar 2022</span></div>
+      <ul>
+        <li>Full-stack development and support with Angular.js, Node.js and MongoDB, including legacy project upgrades and customer data management, within an international team.</li>
+      </ul>
+    </div>
+
+    <div class="company">
+      <div class="row"><span><span class="company-name">Renvis</span><span class="sep">|</span><span class="role-title">Full Stack Intern</span></span><span class="company-dates">Jul 2021 - Sep 2021</span></div>
+      <ul>
+        <li>Contributed to a basketball academy management application from design to production with React, Redux, Node.js, Express and PostgreSQL.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="projects">
+  <h2>Selected Projects</h2>
+  <ul>
+    <li><b>KED Interoperability Centres</b> (Municipalities of Patras and Kamena Vourla): municipal dashboards for sensors, environment, mobility, waste and finance. <span class="muted">Next.js, TypeScript, PostgreSQL/PostGIS, React, Ant Design, MapLibre, Leaflet, Chart.js</span></li>
+    <li><b>Sync2myCity</b> (Kallithea, Kozani, Konitsa, Pydna): school requests platform and the company's first monorepo. <span class="muted">React, Redux Toolkit, React Bootstrap, MapLibre | <a class="link" href="https://schools.cityofkozani.gov.gr">schools.cityofkozani.gov.gr</a></span></li>
+    <li><b>City Events</b> (Argostoli, Oropos, Paionia): municipal events portal with ticket booking. <span class="muted">React, Redux Toolkit, Ant Design, MapLibre, Keycloak | <a class="link" href="https://oropos.city-events.gr">oropos.city-events.gr</a></span></li>
+    <li><b>Act4myCity</b> (Veroia, Kalamaria, Central Macedonia): municipal volunteering platform. <span class="muted">React, Redux Toolkit, Ant Design | <a class="link" href="https://veria.act4my.city">veria.act4my.city</a></span></li>
+    <li><b>EKT Open Data Platform</b> (National Documentation Centre): custom open data portal over CKAN. <span class="muted">React 19, plain CSS, Node.js, CKAN API | <a class="link" href="https://data.ekt.gr">data.ekt.gr</a></span></li>
+    <li><b>Also delivered:</b> Smart City dashboards for live sensor data in 5 municipalities, Tremor Watch seismic monitoring (Trikala), MENR Azerbaijan environmental GIS platform for FAO, Region of Central Macedonia citizen e-services portal, Knossos Palace digital guide, Athens Development (EATA) digital tools programme, TEE Dodecanese heritage repository, Academy of Athens repository and research centre websites, Apokoronas museums portal.</li>
+    <li><b>Independent work:</b> End of Dawn band website in four languages with merchandise store (<a class="link" href="https://endofdawn.com">endofdawn.com</a>), Gem Rooms Luxury Apartments website (<a class="link" href="https://gemluxury.eu">gemluxury.eu</a>).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="row"><span class="role-title">BSc in Computer Science, Aristotle University of Thessaloniki</span></div>
+    <p>Specialisations: Artificial Intelligence; Robotic and Autonomous Systems</p>
+    <ul>
+      <li><b>Thesis:</b> <a class="link" href="https://github.com/kostasoiko4/Anomaly-Detection-in-Autonomous-Driving-Agents-Using-World-Models">Anomaly Detection in Autonomous Driving Agents Using World Models</a>. A two-tier safety monitor for a DreamerV3 deep reinforcement learning driving agent in the CARLA simulator: a CNN detects obstacles by comparing real and world-model-imagined frames, a KL-divergence monitor flags when the world model no longer fits the scene, and a supervisor brakes progressively.</li>
+      <li>Avoided every collision with a parked vehicle in all three test scenarios (75 to 98 per 100 episodes without the monitor), with 0.94 detection recall at 4% false positives, in real time (33 ms per step). <span class="muted">Python, PyTorch, TensorFlow, SheepRL, CARLA</span></li>
+      <li>Co-authored a paper on the work with P.-A. Tosidis and A. Tefas (not yet published).</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="row"><span class="role-title">NGB Business Seeds: 14th Innovation and Technology Competition</span><span class="dates">Nov 2023 - Dec 2023</span></div>
+  </div>
+  <div class="entry">
+    <div class="row"><span class="role-title">OkThess!: 14th Acceleration Programme Cycle</span><span class="dates">Nov 2021 - Dec 2021</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Certifications</h2>
+  <ul>
+    <li><b>PM² Agile Certification</b>, PM² Alliance, Aug 2026 <span class="muted">(Certification ID PM202608041418A9202608137230)</span></li>
+    <li><b>React - The Complete Guide (incl. Next.js, Redux)</b>, Udemy / Academind, Jul 2026, 71.5 hours <span class="muted">(<a class="link" href="https://ude.my/UC-7d9565dd-3442-43b1-9be6-dd1d0e2597b1">verify</a>)</span></li>
+    <li><b>AI Applications in Business Marketing &amp; Management</b>, GlobalCert, Dec 2025 <span class="muted">(Code GREXPTNB000364)</span></li>
+    <li><b>GDPR - General Data Protection Regulation</b>, Sphynx, Aug 2026 <span class="muted">(<a class="link" href="https://certificates.eu.sphynxlabs.net/e92b94435c354a28ae3be7778caac78c/validate">verify</a>)</span></li>
+    <li><b>Cyber Hygiene</b>, Sphynx, Aug 2026 <span class="muted">(<a class="link" href="https://certificates.eu.sphynxlabs.net/2e61d72084574709ae8a702c771ac609/validate">verify</a>)</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Languages</h2>
+  <p><b>Greek:</b> native <span class="sep">|</span> <b>English:</b> professional working proficiency</p>
+</section>
+
+<section>
+  <h2>Interests</h2>
+  <p>Music (playing and writing), Brazilian Jiu-Jitsu and kickboxing, homebrewing, woodworking and leathercraft</p>
+</section>
+
+</body>
+</html>

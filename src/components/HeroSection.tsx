@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from "react-i18next";
 import { ArrowRight, FileDown } from "lucide-react";
-import { CV_URL } from "@/lib/site";
+import { CV_FILENAME, CV_URL } from "@/lib/site";
 
 const stats = [
   { value: "20+", key: "deployments" },
@@ -70,7 +70,7 @@ export const HeroSection = () => {
               {t("hero.cta.primary")}
               <ArrowRight size={16} />
             </a>
-            <a href={CV_URL} download className="btn-secondary">
+            <a href={CV_URL} download={CV_FILENAME} className="btn-secondary">
               <FileDown size={16} />
               {t("hero.cta.secondary")}
             </a>

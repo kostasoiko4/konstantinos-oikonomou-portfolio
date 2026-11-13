@@ -1,10 +1,18 @@
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
 
 // Build date, exposed to index.html (structured data) and used for the sitemap.
 const buildDate = new Date().toISOString().slice(0, 10);
 process.env.VITE_BUILD_DATE = buildDate;
+
+// Fingerprint of the CV, appended to its download links (src/lib/site.ts) so a replaced CV gets a new URL.
+const cvFile = path.resolve(__dirname, "public/Konstantinos-Oikonomou-CV.pdf");
+process.env.VITE_CV_VERSION = existsSync(cvFile)
+  ? createHash("sha256").update(readFileSync(cvFile)).digest("hex").slice(0, 10)
+  : buildDate;
 
 /** Generates robots.txt and sitemap.xml for the configured site address at build time. */
 const seoFiles = (siteUrl: string): Plugin => ({
