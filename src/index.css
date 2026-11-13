@@ -1,56 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================
-   KONSTANTINOS OIKONOMOU - ENTERPRISE MODERN
-   Design System: Charcoal + Silver/Gold Accents
-   ============================================ */
-
 @layer base {
   :root {
-    /* Core Dark Theme - Charcoal Base */
     --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
+    --foreground: 0 0% 93%;
 
-    /* Card Surfaces - Slightly Elevated */
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 9.5%;
+    --card-foreground: 0 0% 93%;
 
-    /* Popover */
     --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover-foreground: 0 0% 93%;
 
-    /* Primary - Champagne Gold */
     --primary: 43 56% 52%;
     --primary-foreground: 0 0% 7%;
 
-    /* Secondary - Slate Gray */
-    --secondary: 220 13% 18%;
+    --secondary: 0 0% 13%;
     --secondary-foreground: 0 0% 85%;
 
-    /* Muted - Subtle grays */
-    --muted: 220 10% 15%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 58%;
 
-    /* Accent - Silver */
     --accent: 0 0% 75%;
     --accent-foreground: 0 0% 10%;
 
-    /* Destructive */
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Borders & Inputs */
-    --border: 220 10% 20%;
-    --input: 220 10% 20%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
     --ring: 43 56% 52%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
-    /* Custom Design Tokens */
+    /* slightly lifted band used on alternating sections */
+    --surface: 0 0% 8.6%;
+
+    /* brushed-gold gradient: light bands make it read as reflective metal */
+    --gold-metal: linear-gradient(
+      120deg,
+      hsl(45 72% 74%) 0%,
+      hsl(43 58% 54%) 22%,
+      hsl(40 62% 40%) 48%,
+      hsl(43 60% 56%) 72%,
+      hsl(46 78% 76%) 100%
+    );
+
     --gold: 43 56% 52%;
     --gold-light: 43 50% 65%;
     --gold-dark: 43 60% 40%;
@@ -60,19 +56,6 @@
     --charcoal-deep: 0 0% 7%;
     --charcoal-light: 0 0% 15%;
 
-    /* Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(43 56% 52%) 0%, hsl(43 50% 65%) 100%);
-    --gradient-dark: linear-gradient(180deg, hsl(0 0% 10%) 0%, hsl(0 0% 7%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 8%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(220 15% 10%) 50%, hsl(0 0% 7%) 100%);
-
-    /* Shadows */
-    --shadow-sm: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
-    --shadow-md: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 8px 32px -8px hsl(0 0% 0% / 0.5);
-    --shadow-gold: 0 0 30px -5px hsl(43 56% 52% / 0.3);
-
-    /* Sidebar (not used but defined) */
     --sidebar-background: 0 0% 8%;
     --sidebar-foreground: 0 0% 90%;
     --sidebar-primary: 43 56% 52%;
@@ -91,171 +74,134 @@
 
   html {
     scroll-behavior: smooth;
+    /* keep anchored sections clear of the fixed header */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "ss01", "ss02", "cv01";
+    font-feature-settings: "cv11", "ss01";
   }
 
   ::selection {
     background: hsl(var(--primary) / 0.3);
     color: hsl(var(--foreground));
   }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+  }
 }
 
 @layer components {
-  /* Hero Button Variants */
-  .btn-hero-primary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-sm tracking-wide uppercase transition-all duration-300;
-    background: var(--gradient-gold);
+  /* Page width + side padding, shared by every section and the header */
+  .shell {
+    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-16;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold;
     color: hsl(var(--primary-foreground));
-    box-shadow: var(--shadow-gold);
+    background-image: var(--gold-metal);
+    background-size: 220% 100%;
+    background-position: 0% 50%;
+    box-shadow:
+      inset 0 1px 0 hsl(46 90% 88% / 0.55),
+      inset 0 -1px 0 hsl(36 60% 22% / 0.45),
+      0 1px 2px hsl(0 0% 0% / 0.5);
+    transition: background-position 0.6s ease;
   }
 
-  .btn-hero-primary:hover {
-    @apply scale-105;
-    box-shadow: 0 0 40px -5px hsl(43 56% 52% / 0.5);
+  /* sliding the gradient moves the highlight across, like light on metal */
+  .btn-primary:hover {
+    background-position: 100% 50%;
   }
 
-  .btn-hero-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-sm tracking-wide uppercase transition-all duration-300;
-    background: transparent;
-    color: hsl(var(--silver));
-    border: 1px solid hsl(var(--silver) / 0.3);
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-medium text-foreground;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
+      var(--gold-metal) border-box;
+    transition: color 0.2s ease;
   }
 
-  .btn-hero-secondary:hover {
-    border-color: hsl(var(--silver));
-    color: hsl(var(--silver-light));
-    @apply scale-105;
+  .btn-secondary:hover {
+    color: hsl(var(--gold-light));
   }
 
-  /* Card Styles */
-  .card-enterprise {
-    background: var(--gradient-card);
-    border: 1px solid hsl(var(--border));
-    @apply rounded-lg transition-all duration-300;
-  }
-
-  .card-enterprise:hover {
-    border-color: hsl(var(--primary) / 0.5);
-    box-shadow: var(--shadow-gold);
-    @apply -translate-y-1;
-  }
-
-  /* Section Styles */
-  .section-heading {
-    @apply text-3xl md:text-4xl font-bold tracking-tight;
-    color: hsl(var(--foreground));
-  }
-
-  .section-subheading {
-    @apply text-lg text-muted-foreground max-w-2xl;
-  }
-
-  /* Gold Text */
-  .text-gold {
-    color: hsl(var(--gold));
-  }
-
-  .text-gold-gradient {
-    background: var(--gradient-gold);
+  .text-gold-metal {
+    background-image: linear-gradient(100deg, hsl(45 72% 72%) 0%, hsl(43 58% 54%) 40%, hsl(40 62% 44%) 65%, hsl(46 75% 70%) 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: transparent;
   }
 
-  /* Divider */
-  .divider-gold {
-    @apply h-px w-full;
-    background: linear-gradient(90deg, transparent 0%, hsl(var(--gold) / 0.5) 50%, transparent 100%);
+  .panel {
+    @apply rounded-lg border;
+    background-image: linear-gradient(180deg, hsl(0 0% 11%) 0%, hsl(0 0% 9%) 100%);
+    transition: border-color 0.2s ease;
   }
 
-  /* Timeline */
-  .timeline-line {
-    @apply absolute left-4 md:left-1/2 top-0 bottom-0 w-px;
-    background: linear-gradient(180deg, hsl(var(--gold)) 0%, hsl(var(--border)) 100%);
+  a.panel:hover,
+  .panel-hover:hover {
+    border-color: hsl(var(--gold) / 0.4);
   }
 
-  /* Tech Badge */
-  .tech-badge {
-    @apply inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200;
-    background: hsl(var(--secondary));
-    color: hsl(var(--silver));
-    border: 1px solid hsl(var(--border));
-  }
-
-  .tech-badge-primary {
-    @apply tech-badge;
-    background: hsl(var(--primary) / 0.15);
+  .icon-box {
+    @apply mb-6 inline-flex h-11 w-11 items-center justify-center rounded-md border;
+    border-color: hsl(var(--gold) / 0.25);
+    background: hsl(var(--gold) / 0.07);
     color: hsl(var(--gold));
-    border-color: hsl(var(--gold) / 0.3);
   }
 
-  /* Repo Card */
-  .repo-card {
-    @apply p-6 rounded-lg border transition-all duration-300;
-    background: hsl(var(--charcoal));
-    border-color: hsl(var(--border));
+  .tag {
+    @apply inline-flex items-center rounded border px-2.5 py-1 font-mono text-xs text-muted-foreground;
   }
 
-  .repo-card:hover {
-    border-color: hsl(var(--silver) / 0.5);
-    @apply -translate-y-1;
-    box-shadow: var(--shadow-md);
-  }
-}
-
-@layer utilities {
-  /* Fade in animation */
-  .fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+  .section {
+    @apply border-t py-20 md:py-28;
   }
 
-  .fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
+  .section-alt {
+    background-color: hsl(var(--surface));
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  /* Scroll reveal (see Reveal in Section.tsx): a short fade-up, once */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.45s ease-out,
+      transform 0.45s ease-out;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      transform: none;
+      transition: opacity 0.2s linear;
     }
   }
 
-  /* Stagger delays */
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-
-  /* Noise overlay for texture */
-  .noise-overlay {
-    position: relative;
-  }
-
-  .noise-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: 1;
+  /* Contact call-to-action: gold-tinted border fading downwards, warm light from the top */
+  .cta-card {
+    @apply relative overflow-hidden rounded-2xl;
+    border: 1px solid transparent;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, hsl(var(--gold) / 0.16), transparent 70%) padding-box,
+      linear-gradient(180deg, hsl(0 0% 10.5%), hsl(0 0% 8%)) padding-box,
+      linear-gradient(180deg, hsl(var(--gold) / 0.55), hsl(var(--gold) / 0.1) 55%, hsl(var(--border))) border-box;
   }
 }

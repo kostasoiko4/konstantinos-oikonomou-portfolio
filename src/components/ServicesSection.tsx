@@ -1,63 +1,66 @@
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { Monitor, Smartphone, RefreshCw } from "lucide-react";
+import { ArrowRight, Monitor, RefreshCw, Smartphone } from "lucide-react";
+import { Reveal, SectionHeader } from "./Section";
+
+/** Each service links to the work that backs it up. */
+const services = [
+  { key: "webDev", icon: Monitor, proof: "#case-vourla" },
+  { key: "mobile", icon: Smartphone, proof: "#experience" },
+  { key: "legacy", icon: RefreshCw, proof: "#case-monorepo" },
+];
+
+const steps = ["discovery", "build", "launch", "support"];
 
 export const ServicesSection = () => {
   const { t } = useTranslation();
 
-  const services = [
-    {
-      key: "webDev",
-      icon: Monitor,
-    },
-    {
-      key: "mobile",
-      icon: Smartphone,
-    },
-    {
-      key: "legacy",
-      icon: RefreshCw,
-    },
-  ];
-
   return (
-    <section id="services" className="py-24 md:py-32 relative">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="section-heading mb-4">{t("services.title")}</h2>
-          <p className="section-subheading mx-auto">{t("services.subtitle")}</p>
-        </motion.div>
+    <section id="services" className="section section-alt">
+      <div className="shell">
+        <SectionHeader
+          index="06"
+          label={t("nav.services")}
+          title={t("services.title")}
+          subtitle={t("services.subtitle")}
+        />
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.key}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="card-enterprise p-8"
-            >
-              <div className="w-14 h-14 rounded-lg bg-gold/10 flex items-center justify-center mb-6">
-                <service.icon className="w-7 h-7 text-gold" />
+        <Reveal className="grid gap-5 md:grid-cols-3">
+          {services.map((service) => (
+            <div key={service.key} className="panel panel-hover flex flex-col p-7 md:p-8">
+              <div className="icon-box">
+                <service.icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-foreground">
+              <h3 className="mb-3 text-lg font-semibold text-foreground">
                 {t(`services.items.${service.key}.title`)}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
                 {t(`services.items.${service.key}.description`)}
               </p>
-            </motion.div>
+              <a
+                href={service.proof}
+                className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-gold"
+              >
+                {t(`services.items.${service.key}.proof`)}
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           ))}
-        </div>
+        </Reveal>
+
+        <Reveal className="mt-14">
+          <h3 className="mb-6 font-mono text-xs uppercase tracking-wider text-gold">{t("services.processTitle")}</h3>
+          <ol className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
+              <li key={step} className="bg-[hsl(var(--surface))] p-6">
+                <p className="font-mono text-xs text-gold">{String(index + 1).padStart(2, "0")}</p>
+                <p className="mt-2 font-semibold text-foreground">{t(`services.process.${step}.title`)}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  {t(`services.process.${step}.text`)}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   );

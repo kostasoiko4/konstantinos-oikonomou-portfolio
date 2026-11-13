@@ -1,74 +1,66 @@
-# Welcome to your Lovable project
+# Konstantinos Oikonomou: portfolio
 
-## Project info
+Personal portfolio of Konstantinos Oikonomou, Frontend & Full-Stack Engineer based in Thessaloniki.
+Live at https://oikonomou-portfolio.web.app
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Single-page site in English (`/`) and Greek (`/?lang=el`).
 
-## How can I edit this code?
+## Stack
 
-There are several ways of editing your application.
+- React 19 + TypeScript
+- Vite 7
+- Tailwind CSS
+- i18next (EN / EL)
+- react-helmet-async for per-language meta tags
+- Firebase Hosting
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Bun installed - [install Bun](https://bun.sh/docs/installation)
-
-Follow these steps:
+## Development
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-bun install
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-bun run dev
+npm install      # or: bun install
+npm run dev      # start the dev server
+npm run build    # production build into dist/
+npm run lint
 ```
 
-**Edit a file directly in GitHub**
+## Project structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+  components/     page sections (Hero, Selected Work, Experience, ...)
+  i18n/           translations for English and Greek, and language detection from ?lang=
+  lib/site.ts     site address, CV link, contact links
+  assets/         project screenshots and photos
+public/
+  images/                       hero photo (preloaded from index.html)
+  og-image.jpg                  link preview image (1200x630)
+  Konstantinos-Oikonomou-CV.pdf downloadable CV: replace the file, keep the name
+  404.html                      real 404 page served by Firebase
+```
 
-**Use GitHub Codespaces**
+Text content lives in `src/i18n/translations.ts`. Both languages share the same keys.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## SEO
 
-## What technologies are used for this project?
+- **Site address:** `VITE_SITE_URL` in `.env`. It feeds the canonical URL, Open Graph and Twitter tags,
+  the JSON-LD structured data in `index.html`, and the generated `sitemap.xml` and `robots.txt`.
+  When moving to a custom domain, change it there and rebuild.
+- **Head tags:** English defaults are static in `index.html` for crawlers and link previews.
+  `src/pages/Index.tsx` swaps the language-specific ones (title, description, canonical, og:locale) at runtime.
+- **Structured data:** `Person`, `ProfilePage`, `WebSite` and the portrait `ImageObject`, in `index.html`.
+  Update the credentials or employer there when they change.
+- **Sitemap and robots:** generated at build time by the `seo-files` plugin in `vite.config.ts`.
+- **Languages:** each language has its own URL, linked with `hreflang` in `index.html` and the sitemap.
+- **Hosting (`firebase.json`):** no catch-all rewrite, so unknown URLs return a real 404.
+  Hashed assets are cached for a year. The CV PDF is sent with `X-Robots-Tag: noindex`.
+- **Preview image:** `public/og-image.jpg`. If the title or numbers change, regenerate it at 1200x630.
 
-This project is built with:
+After deploying, submit `https://oikonomou-portfolio.web.app/sitemap.xml` in Google Search Console
+and Bing Webmaster Tools.
 
-- Bun 1.3.4
-- Vite 7.2.7
-- TypeScript
-- React 19.2.1
-- shadcn-ui
-- Tailwind CSS
+## Deploy
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```sh
+npm run build
+firebase deploy --only hosting
+```

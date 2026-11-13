@@ -1,76 +1,48 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
-import { ServicesSection } from "@/components/ServicesSection";
-import { ProjectsSection } from "@/components/ProjectsSection";
-import { LabSection } from "@/components/LabSection";
-import { ExpertiseSection } from "@/components/ExpertiseSection";
+import { SelectedWorkSection } from "@/components/SelectedWorkSection";
+import { MoreProjectsSection } from "@/components/MoreProjectsSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
+import { ExpertiseSection } from "@/components/ExpertiseSection";
 import { AboutSection } from "@/components/AboutSection";
+import { ServicesSection } from "@/components/ServicesSection";
 import { Footer } from "@/components/Footer";
+import { SITE_URL } from "@/lib/site";
 
 const Index = () => {
+  const { t, i18n } = useTranslation();
+  // Each language has its own address; English is the default at the root.
+  const pageUrl = i18n.language === "el" ? `${SITE_URL}/?lang=el` : `${SITE_URL}/`;
+
   return (
     <>
-      <Helmet>
-        <title>Konstantinos Oikonomou | Frontend Engineer & Solutions Architect</title>
-        <meta
-          name="description"
-          content="Delivering scalable React applications for the Public Sector, Enterprise, and Startups. Specialized in web applications, mobile solutions, and legacy modernization."
-        />
-        <meta
-          name="keywords"
-          content="Frontend Engineer, React Developer, Solutions Architect, Public Sector, Greece, Thessaloniki, React.js, React Native, TypeScript"
-        />
-        <meta property="og:title" content="Konstantinos Oikonomou | Frontend Engineer & Solutions Architect" />
-        <meta
-          property="og:description"
-          content="Delivering scalable React applications for the Public Sector, Enterprise, and Startups."
-        />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://konstantinos-oikonomou.com" />
-        
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Konstantinos Oikonomou",
-            jobTitle: "Frontend Engineer & Solutions Architect",
-            url: "https://konstantinos-oikonomou.com",
-            email: "kostasoikonomou4@gmail.com",
-            telephone: "+306987802777",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Thessaloniki",
-              addressCountry: "Greece",
-            },
-            sameAs: [
-              "https://github.com/kostasoiko4",
-              "https://www.linkedin.com/in/konstantinos-oikonomou-8a8a3b1b6/",
-            ],
-            knowsAbout: [
-              "React.js",
-              "React Native",
-              "TypeScript",
-              "JavaScript",
-              "Redux Toolkit",
-              "Node.js",
-            ],
-          })}
-        </script>
+      {/* Only the tags that change with the language; the rest are static in index.html. */}
+      <Helmet htmlAttributes={{ lang: i18n.language }}>
+        <title>{t("seo.title")}</title>
+        <meta name="description" content={t("seo.description")} />
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:title" content={t("seo.title")} />
+        <meta property="og:description" content={t("seo.shareDescription")} />
+        <meta property="og:locale" content={t("seo.locale")} />
+        <meta property="og:locale:alternate" content={t("seo.alternateLocale")} />
+        <meta name="twitter:title" content={t("seo.title")} />
+        <meta name="twitter:description" content={t("seo.shareDescription")} />
       </Helmet>
 
       <div className="min-h-screen bg-background text-foreground">
         <Header />
         <main>
+          {/* Portfolio first: the work, then the person, then the offer */}
           <HeroSection />
-          <ServicesSection />
-          <ProjectsSection />
-          <LabSection />
-          <ExpertiseSection />
+          <SelectedWorkSection />
+          <MoreProjectsSection />
           <ExperienceSection />
+          <ExpertiseSection />
           <AboutSection />
+          <ServicesSection />
         </main>
         <Footer />
       </div>

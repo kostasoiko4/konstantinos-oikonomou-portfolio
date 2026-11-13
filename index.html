@@ -2,23 +2,202 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/KOLogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Konstantinos Oikonomou | Frontend Engineer & Solutions Architect</title>
-    <meta name="description" content="Delivering scalable React applications for the Public Sector, Enterprise, and Startups. Specialized in web applications, mobile solutions, and legacy modernization." />
+
+    <!--
+      Defaults (English) for crawlers and link previews that don't run JavaScript.
+      Tags marked data-rh are replaced at runtime by react-helmet with the active language's version.
+      The site address comes from VITE_SITE_URL in .env.
+    -->
+    <title>Konstantinos Oikonomou | Frontend & Full-Stack Engineer</title>
+    <meta
+      name="description"
+      content="Frontend & Full-Stack Engineer in Thessaloniki, Greece. Web platforms for municipalities, research institutions and public bodies, with React and Next.js."
+      data-rh="true"
+    />
     <meta name="author" content="Konstantinos Oikonomou" />
-    <meta name="keywords" content="Frontend Engineer, React Developer, Solutions Architect, Public Sector, Greece, Thessaloniki, React.js, React Native, TypeScript" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="%VITE_SITE_URL%/" data-rh="true" />
 
-    <meta property="og:title" content="Konstantinos Oikonomou | Frontend Engineer & Solutions Architect" />
-    <meta property="og:description" content="Delivering scalable React applications for the Public Sector, Enterprise, and Startups." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Language versions -->
+    <link rel="alternate" hreflang="en" href="%VITE_SITE_URL%/" />
+    <link rel="alternate" hreflang="el" href="%VITE_SITE_URL%/?lang=el" />
+    <link rel="alternate" hreflang="x-default" href="%VITE_SITE_URL%/" />
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="profile:first_name" content="Konstantinos" />
+    <meta property="profile:last_name" content="Oikonomou" />
+    <meta property="og:site_name" content="Konstantinos Oikonomou" />
+    <meta property="og:url" content="%VITE_SITE_URL%/" data-rh="true" />
+    <meta property="og:title" content="Konstantinos Oikonomou | Frontend & Full-Stack Engineer" data-rh="true" />
+    <meta
+      property="og:description"
+      content="Web platforms for municipalities, research institutions and public bodies, from React frontends to full-stack Next.js applications. 20+ live deployments across Greece."
+      data-rh="true"
+    />
+    <meta property="og:locale" content="en_US" data-rh="true" />
+    <meta property="og:locale:alternate" content="el_GR" data-rh="true" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Konstantinos Oikonomou, Frontend & Full-Stack Engineer: 20+ live deployments across 15+ municipalities" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@kostasoiko4" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    
-    <link rel="canonical" href="https://konstantinos-oikonomou.com" />
+    <meta name="twitter:title" content="Konstantinos Oikonomou | Frontend & Full-Stack Engineer" data-rh="true" />
+    <meta
+      name="twitter:description"
+      content="Web platforms for municipalities, research institutions and public bodies, from React frontends to full-stack Next.js applications."
+      data-rh="true"
+    />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Konstantinos Oikonomou, Frontend & Full-Stack Engineer" />
+
+    <!-- Profiles that belong to the same person -->
+    <link rel="me" href="https://github.com/kostasoiko4" />
+    <link rel="me" href="https://www.linkedin.com/in/konstantinos-oikonomou-8a8a3b1b6/" />
+
+    <!-- Icons and app manifest -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#121212" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Hero photo: fetched in parallel with the app bundle (same srcset as the <img> in HeroSection) -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/hero-1920.jpg"
+      imagesrcset="/images/hero-960.jpg 960w, /images/hero-1920.jpg 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data: who this site is about, for search engines -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "%VITE_SITE_URL%/#website",
+            "url": "%VITE_SITE_URL%/",
+            "name": "Konstantinos Oikonomou",
+            "alternateName": "Κωνσταντίνος Οικονόμου",
+            "inLanguage": ["en", "el"],
+            "publisher": { "@id": "%VITE_SITE_URL%/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "%VITE_SITE_URL%/#profile",
+            "url": "%VITE_SITE_URL%/",
+            "name": "Konstantinos Oikonomou | Frontend & Full-Stack Engineer",
+            "isPartOf": { "@id": "%VITE_SITE_URL%/#website" },
+            "inLanguage": "en",
+            "dateModified": "%VITE_BUILD_DATE%",
+            "primaryImageOfPage": { "@id": "%VITE_SITE_URL%/#portrait" },
+            "mainEntity": { "@id": "%VITE_SITE_URL%/#person" }
+          },
+          {
+            "@type": "ImageObject",
+            "@id": "%VITE_SITE_URL%/#portrait",
+            "url": "%VITE_SITE_URL%/konstantinos-oikonomou.jpg",
+            "width": 400,
+            "height": 400,
+            "caption": "Konstantinos Oikonomou"
+          },
+          {
+            "@type": "Person",
+            "@id": "%VITE_SITE_URL%/#person",
+            "name": "Konstantinos Oikonomou",
+            "alternateName": "Κωνσταντίνος Οικονόμου",
+            "givenName": "Konstantinos",
+            "familyName": "Oikonomou",
+            "jobTitle": "Frontend & Full-Stack Engineer",
+            "description": "Frontend & Full-Stack Engineer in Thessaloniki, Greece, building web platforms for municipalities, research institutions and public bodies: smart city dashboards, citizen services, open data portals and digital repositories.",
+            "url": "%VITE_SITE_URL%/",
+            "image": { "@id": "%VITE_SITE_URL%/#portrait" },
+            "email": "mailto:kostasoikonomou4@gmail.com",
+            "telephone": "+30 698 780 2777",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Thessaloniki",
+              "addressCountry": "GR"
+            },
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Dotsoft",
+              "url": "https://dotsoft.gr"
+            },
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Aristotle University of Thessaloniki",
+              "url": "https://www.auth.gr"
+            },
+            "knowsLanguage": ["el", "en"],
+            "knowsAbout": [
+              "React",
+              "Next.js",
+              "TypeScript",
+              "JavaScript",
+              "Node.js",
+              "PostgreSQL",
+              "PostGIS",
+              "React Native",
+              "Redux Toolkit",
+              "Monorepo architecture",
+              "Smart city platforms",
+              "Open data portals",
+              "Web mapping"
+            ],
+            "hasCredential": [
+              {
+                "@type": "EducationalOccupationalCredential",
+                "name": "PM² Agile Certification",
+                "credentialCategory": "certification",
+                "recognizedBy": { "@type": "Organization", "name": "PM² Alliance" }
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "name": "React - The Complete Guide (incl. Next.js, Redux)",
+                "credentialCategory": "certificate",
+                "url": "https://ude.my/UC-7d9565dd-3442-43b1-9be6-dd1d0e2597b1",
+                "recognizedBy": { "@type": "Organization", "name": "Udemy" }
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "name": "GDPR - General Data Protection Regulation",
+                "credentialCategory": "certificate",
+                "url": "https://certificates.eu.sphynxlabs.net/e92b94435c354a28ae3be7778caac78c/validate",
+                "recognizedBy": { "@type": "Organization", "name": "Sphynx" }
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "name": "AI Applications in Business Marketing & Management",
+                "credentialCategory": "certification",
+                "recognizedBy": { "@type": "Organization", "name": "GlobalCert" }
+              }
+            ],
+            "sameAs": [
+              "https://github.com/kostasoiko4",
+              "https://www.linkedin.com/in/konstantinos-oikonomou-8a8a3b1b6/"
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>

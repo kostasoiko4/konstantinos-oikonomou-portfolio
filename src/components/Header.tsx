@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { LanguageToggle } from "./LanguageToggle";
+
+const navItems = [
+  { key: "work", href: "#work" },
+  { key: "experience", href: "#experience" },
+  { key: "about", href: "#about" },
+  { key: "services", href: "#services" },
+];
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -10,104 +16,69 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { key: "services", href: "#services" },
-    { key: "projects", href: "#projects" },
-    { key: "lab", href: "#lab" },
-    { key: "expertise", href: "#expertise" },
-    { key: "experience", href: "#experience" },
-    { key: "about", href: "#about" },
-  ];
+  const solid = isScrolled || isMobileMenuOpen;
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/90 backdrop-blur-lg border-b border-border"
-          : "bg-transparent"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
+        solid ? "border-border bg-background/85 backdrop-blur-md" : "border-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-lg md:text-xl font-bold text-gold">KO</span>
+      <div className="shell">
+        <div className="flex h-16 items-center justify-between gap-6">
+          <a href="#" className="shrink-0 text-sm font-semibold tracking-tight text-foreground">
+            Konstantinos Oikonomou
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden items-center gap-8 lg:flex">
             {navItems.map((item) => (
               <a
                 key={item.key}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="whitespace-nowrap text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {t(`nav.${item.key}`)}
               </a>
             ))}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-3">
             <LanguageToggle />
-            <a
-              href="#contact"
-              className="hidden md:inline-flex btn-hero-primary text-xs px-4 py-2"
-            >
+            <a href="#contact" className="btn-primary hidden px-4 py-2 md:inline-flex">
               {t("nav.contact")}
             </a>
-
-            {/* Mobile Menu Toggle */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-foreground"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="-mr-2 p-2 text-foreground lg:hidden"
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-b border-border"
-          >
-            <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.key}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {t(`nav.${item.key}`)}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-hero-primary text-center mt-4"
-              >
-                {t("nav.contact")}
-              </a>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+      {isMobileMenuOpen && (
+        <nav className="shell flex flex-col gap-1 pb-6 lg:hidden">
+          {[...navItems, { key: "contact", href: "#contact" }].map((item) => (
+            <a
+              key={item.key}
+              href={item.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2 text-base text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {t(`nav.${item.key}`)}
+            </a>
+          ))}
+        </nav>
+      )}
+    </header>
   );
 };

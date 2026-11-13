@@ -1,82 +1,150 @@
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import heroImage from "@/assets/profile-hero.png";
+import { FileDown } from "lucide-react";
+import { Reveal, SectionHeader } from "./Section";
+import { CV_URL } from "@/lib/site";
+
+type Role = { key: string; stack: string[]; current?: boolean };
+
+/** Recent roles, shown in full. */
+const companies: { key: string; roles: Role[] }[] = [
+  {
+    key: "dotsoft",
+    roles: [
+      {
+        key: "dotsoftSenior",
+        current: true,
+        stack: ["Next.js", "TypeScript", "PostgreSQL", "PostGIS", "React.js", "Monorepo", "PM² Agile"],
+      },
+      { key: "dotsoftMidSenior", stack: ["React 19", "Redux Toolkit", "Ant Design", "Leaflet", "CKAN", "Docker"] },
+      { key: "dotsoftMid", stack: ["React.js", "Redux Toolkit", "Bootstrap", "Ant Design"] },
+    ],
+  },
+  {
+    key: "weblogic",
+    roles: [
+      { key: "weblogicLead", stack: ["React Native", "Redux Toolkit"] },
+      { key: "weblogicFrontend", stack: ["React.js", "Redux", "Bootstrap"] },
+    ],
+  },
+];
+
+/** Short early roles, one line each. */
+const earlierRoles = [
+  { company: "instashop", role: "instashop", stack: "Angular.js · Node.js · MongoDB" },
+  { company: "renvis", role: "renvis", stack: "React.js · Redux · Node.js · Express · PostgreSQL" },
+];
 
 export const ExperienceSection = () => {
   const { t } = useTranslation();
-
-  const roles = ["dotsoft", "weblogic", "instashop", "renvis"];
+  const list = (key: string) => t(key, { returnObjects: true }) as unknown as string[];
 
   return (
-    <section id="experience" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 hidden lg:block">
-        <img 
-          src={heroImage} 
-          alt="" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-transparent" />
-      </div>
-
-      <div className="container relative z-10 mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="section-heading mb-4">{t("experience.title")}</h2>
-          <p className="section-subheading mx-auto">{t("experience.subtitle")}</p>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="max-w-3xl mx-auto relative">
-          {/* Line */}
-          <div className="absolute left-0 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-border" />
-
-          {roles.map((role, index) => (
-            <motion.div
-              key={role}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`relative flex flex-col md:flex-row gap-8 mb-12 ${
-                index % 2 === 0 ? "md:flex-row-reverse" : ""
-              }`}
-            >
-              {/* Content */}
-              <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : ""}`}>
-                <div className="card-enterprise p-6 ml-8 md:ml-0">
-                  <div className={`flex items-center gap-3 mb-3 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}>
-                    <div className="w-2 h-2 rounded-full bg-gold" />
-                    <span className="text-sm text-muted-foreground">
-                      {t(`experience.roles.${role}.period`)}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-1">
-                    {t(`experience.roles.${role}.company`)}
-                  </h3>
-                  <p className="text-gold text-sm font-medium mb-3">
-                    {t(`experience.roles.${role}.role`)}
-                  </p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {t(`experience.roles.${role}.description`)}
-                  </p>
-                </div>
-              </div>
-
-              {/* Dot */}
-              <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-6 w-4 h-4 rounded-full bg-gold border-4 border-background" />
-
-              {/* Spacer for alternating layout */}
-              <div className="hidden md:block flex-1" />
-            </motion.div>
-          ))}
+    <section id="experience" className="section">
+      <div className="shell">
+        <div className="flex flex-wrap items-end justify-between gap-x-8">
+          <SectionHeader
+            index="03"
+            label={t("nav.experience")}
+            title={t("experience.title")}
+            subtitle={t("experience.subtitle")}
+          />
+          <a
+            href={CV_URL}
+            download
+            className="mb-12 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-gold md:mb-14"
+          >
+            <FileDown size={16} className="text-gold" />
+            {t("experience.cv")}
+          </a>
         </div>
+
+        <Reveal className="space-y-5">
+          {companies.map((company) => (
+            <article
+              key={company.key}
+              className="panel grid gap-6 p-6 md:grid-cols-[200px_1fr] md:gap-10 md:p-8 lg:grid-cols-[240px_1fr]"
+            >
+              <header>
+                <h3 className="text-xl font-semibold text-gold">{t(`experience.companies.${company.key}.name`)}</h3>
+                <p className="mt-1 font-mono text-xs text-muted-foreground">
+                  {t(`experience.companies.${company.key}.period`)}
+                </p>
+              </header>
+
+              <ol className="space-y-8 border-l border-border pl-6">
+                {company.roles.map((role) => (
+                  <li key={role.key} className="relative">
+                    {/* timeline dot, centred on the border line */}
+                    <span
+                      className={`absolute -left-[30px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-[hsl(0_0%_10%)] ${
+                        role.current ? "bg-gold" : "bg-muted-foreground/50"
+                      }`}
+                    />
+
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <h4 className="flex flex-wrap items-center gap-2 font-semibold text-foreground">
+                        {t(`experience.roles.${role.key}.title`)}
+                        {role.current && (
+                          <span className="rounded-full border border-gold/40 px-2 py-0.5 font-mono text-[10px] font-normal uppercase tracking-wider text-gold">
+                            {t("experience.current")}
+                          </span>
+                        )}
+                      </h4>
+                      <p className="font-mono text-xs text-muted-foreground">
+                        {t(`experience.roles.${role.key}.period`)}
+                      </p>
+                    </div>
+
+                    <ul className="mt-3 max-w-3xl space-y-2 text-sm leading-relaxed text-muted-foreground">
+                      {list(`experience.roles.${role.key}.points`).map((point) => (
+                        <li key={point} className="flex gap-3">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold/70" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <ul className="mt-4 flex flex-wrap gap-1.5">
+                      {role.stack.map((tech) => (
+                        <li key={tech} className="tag px-2 py-0.5 text-[11px]">
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          ))}
+
+          <article className="panel p-6 md:p-8">
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              {t("experience.earlier")}
+            </h3>
+            <ul className="divide-y divide-border">
+              {earlierRoles.map((item) => (
+                <li
+                  key={item.company}
+                  className="grid gap-1 py-4 first:pt-0 last:pb-0 md:grid-cols-[200px_1fr] md:gap-10 lg:grid-cols-[240px_1fr]"
+                >
+                  <div>
+                    <p className="font-semibold text-gold">{t(`experience.companies.${item.company}.name`)}</p>
+                    <p className="font-mono text-xs text-muted-foreground">
+                      {t(`experience.roles.${item.role}.period`)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">{t(`experience.roles.${item.role}.title`)}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {t(`experience.roles.${item.role}.summary`)}
+                    </p>
+                    <p className="mt-1.5 font-mono text-[11px] text-muted-foreground/80">{item.stack}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </Reveal>
       </div>
     </section>
   );

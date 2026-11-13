@@ -1,136 +1,82 @@
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { ArrowRight, Github } from "lucide-react";
-import heroImage from "@/assets/profile-coding.png";
+import { Trans, useTranslation } from "react-i18next";
+import { ArrowRight, FileDown } from "lucide-react";
+import { CV_URL } from "@/lib/site";
+
+const stats = [
+  { value: "20+", key: "deployments" },
+  { value: "15+", key: "municipalities" },
+];
 
 export const HeroSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay">
-      {/* Background Gradient */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          background: "linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(220 15% 10%) 50%, hsl(0 0% 7%) 100%)",
-        }}
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden">
+      {/*
+        Background photo. Mirrored so the subject sits on the right, away from the text.
+        Served from public/images with the same srcset that index.html preloads, so it starts downloading before the app runs.
+      */}
+      <img
+        src="/images/hero-1920.jpg"
+        srcSet="/images/hero-960.jpg 960w, /images/hero-1920.jpg 1920w"
+        sizes="100vw"
+        alt=""
+        aria-hidden="true"
+        width={1920}
+        height={1280}
+        fetchPriority="high"
+        className="absolute inset-0 -z-20 h-full w-full -scale-x-100 object-cover object-[30%_0%]"
       />
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-silver/5 rounded-full blur-3xl" />
+      {/* Readability overlays: darker on the left where the text is, fade into the page at the edges */}
+      <div className="absolute inset-0 -z-10 bg-background/70 lg:hidden" />
+      <div className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-background from-20% via-background/85 via-45% to-background/5 lg:block" />
+      <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-background/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-background to-transparent" />
 
-      <div className="container relative z-10 mx-auto px-4 md:px-6 py-20 pt-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left"
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 mb-6"
-            >
-              <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
-              <span className="text-sm text-gold font-medium">{t("hero.tag")}</span>
-            </motion.div>
+      <div className="shell py-32">
+        {/* No entrance animation: the headline is the page's largest content and should paint immediately */}
+        <div className="max-w-2xl">
+          {/* The name is part of the h1 so searches for it match the page's main heading */}
+          <h1 className="mb-6">
+            <span className="mb-5 flex items-center gap-3 font-mono text-sm font-normal tracking-wide text-gold">
+              <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" aria-hidden="true" />
+              {t("hero.name")}
+            </span>
+            <span className="sr-only">, </span>
+            <span className="block text-4xl font-semibold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+              <Trans i18nKey="hero.headline" components={{ gold: <span className="text-gold-metal whitespace-nowrap" /> }} />
+            </span>
+          </h1>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              <span className="text-gold-gradient">{t("hero.headline")}</span>
-            </h1>
+          <p className="mb-8 max-w-xl text-lg leading-relaxed text-foreground/70">{t("hero.subhead")}</p>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-10">
-              {t("hero.subhead")}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <motion.a
-                href="#projects"
-                className="btn-hero-primary rounded-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {t("hero.cta.primary")}
-                <ArrowRight size={18} />
-              </motion.a>
-
-              <motion.a
-                href="https://github.com/kostasoiko4?tab=repositories"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-hero-secondary rounded-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Github size={18} />
-                {t("hero.cta.secondary")}
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative max-w-md mx-auto lg:max-w-none">
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-gold/20 via-transparent to-transparent rounded-2xl blur-2xl" />
-              
-              {/* Image Container */}
-              <div className="relative overflow-hidden rounded-2xl border border-border/50">
-                <img
-                  src={heroImage}
-                  alt="Konstantinos Oikonomou - Frontend Engineer"
-                  className="w-full h-auto object-cover"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+          <dl className="mb-10 flex flex-wrap gap-x-10 gap-y-4">
+            {stats.map((stat) => (
+              <div key={stat.key} className="border-l border-gold/40 pl-4">
+                <dt className="sr-only">{t(`hero.stats.${stat.key}`)}</dt>
+                <dd>
+                  <span className="text-gold-metal block text-3xl font-semibold leading-none">{stat.value}</span>
+                  <span className="mt-1.5 block font-mono text-xs text-muted-foreground">
+                    {t(`hero.stats.${stat.key}`)}
+                  </span>
+                </dd>
               </div>
+            ))}
+          </dl>
 
-              {/* Floating Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="absolute -bottom-4 -left-4 md:left-4 bg-card border border-border rounded-lg px-4 py-3 shadow-lg"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
-                    <span className="text-gold font-bold">3+</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Years Experience</p>
-                    <p className="text-xs text-muted-foreground">Public Sector Focus</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
+          <div className="flex flex-wrap gap-3">
+            <a href="#work" className="btn-primary">
+              {t("hero.cta.primary")}
+              <ArrowRight size={16} />
+            </a>
+            <a href={CV_URL} download className="btn-secondary">
+              <FileDown size={16} />
+              {t("hero.cta.secondary")}
+            </a>
+          </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2"
-        >
-          <div className="w-1 h-2 bg-gold rounded-full" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };

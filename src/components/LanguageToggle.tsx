@@ -1,29 +1,22 @@
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
 
 export const LanguageToggle = () => {
   const { i18n } = useTranslation();
   const currentLang = i18n.language;
 
   const toggleLanguage = () => {
-    const newLang = currentLang === "en" ? "el" : "en";
-    i18n.changeLanguage(newLang);
+    i18n.changeLanguage(currentLang === "en" ? "el" : "en");
   };
 
   return (
-    <motion.button
+    <button
       onClick={toggleLanguage}
-      className="relative flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-full border border-border bg-secondary/50 hover:bg-secondary transition-colors"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      aria-label={currentLang === "en" ? "Αλλαγή σε Ελληνικά" : "Switch to English"}
+      className="rounded border border-border px-2 py-1 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground/30"
     >
-      <span className={currentLang === "en" ? "text-gold" : "text-muted-foreground"}>
-        EN
-      </span>
-      <span className="text-muted-foreground">/</span>
-      <span className={currentLang === "el" ? "text-gold" : "text-muted-foreground"}>
-        ΕΛ
-      </span>
-    </motion.button>
+      <span className={currentLang === "en" ? "text-foreground" : ""}>EN</span>
+      <span className="mx-1 opacity-40">/</span>
+      <span className={currentLang === "el" ? "text-foreground" : ""}>ΕΛ</span>
+    </button>
   );
 };

@@ -1,105 +1,86 @@
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
-import handshakeImage from "@/assets/profile-handshake.png";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { ArrowRight, Check, Copy, FileDown, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { Eyebrow, Reveal } from "./Section";
+import { CV_URL, EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 
 export const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => setCopied(false), 2000);
+    return () => clearTimeout(timer);
+  }, [copied]);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+    } catch {
+      // Clipboard can be blocked (insecure context, permissions); fall back to the mail client.
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
+
+  const linkClass = "inline-flex items-center gap-2 transition-colors hover:text-gold";
 
   return (
-    <footer id="contact" className="relative py-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 opacity-1">
-        <img 
-          src={handshakeImage} 
-          alt="" 
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/95 to-charcoal-deep/90" />
+    <footer id="contact" className="section pb-10 md:pb-10">
+      <div className="shell">
+        <Reveal className="cta-card px-6 py-16 text-center sm:px-12 md:py-24">
+          <Eyebrow index="07" label={t("nav.contact")} centered className="mb-6" />
 
-      <div className="container relative z-10 mx-auto px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">
-            {t("footer.title")}
+          <h2 className="mx-auto max-w-3xl text-4xl font-semibold tracking-tight text-foreground md:text-6xl">
+            <Trans i18nKey="footer.title" components={{ gold: <span className="text-gold-metal" /> }} />
           </h2>
-          <p className="text-lg text-muted-foreground">
-            {t("footer.tagline")}
-          </p>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col md:flex-row items-center justify-center gap-8 mb-12"
-        >
-          {/* Email */}
-          <a
-            href="mailto:kostasoikonomou4@gmail.com"
-            className="flex items-center gap-3 text-foreground hover:text-gold transition-colors"
-          >
-            <Mail className="w-5 h-5 text-gold" />
-            <span>kostasoikonomou4@gmail.com</span>
-          </a>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-foreground/70">{t("footer.tagline")}</p>
 
-          {/* Phone */}
-          <a
-            href="tel:+306987802777"
-            className="flex items-center gap-3 text-foreground hover:text-gold transition-colors"
-          >
-            <Phone className="w-5 h-5 text-gold" />
-            <span>+30 6987802777</span>
-          </a>
-
-          {/* Location */}
-          <div className="flex items-center gap-3 text-muted-foreground">
-            <MapPin className="w-5 h-5 text-gold" />
-            <span>{t("footer.location")}</span>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href={`mailto:${EMAIL}`} className="btn-primary group w-full px-7 py-3.5 text-base sm:w-auto">
+              <Mail size={18} />
+              {t("footer.cta")}
+              <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+            <button
+              type="button"
+              onClick={copyEmail}
+              aria-label={t("footer.copy")}
+              className="btn-secondary w-full px-5 py-3.5 text-sm sm:w-auto sm:px-7 sm:text-base"
+            >
+              {copied ? <Check size={18} className="shrink-0 text-gold" /> : <Copy size={18} className="shrink-0" />}
+              <span aria-live="polite">{copied ? t("footer.copied") : EMAIL}</span>
+            </button>
           </div>
-        </motion.div>
 
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center gap-6 mb-12"
-        >
-          <a
-            href="https://www.linkedin.com/in/konstantinos-oikonomou-8a8a3b1b6/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-secondary border border-border flex items-center justify-center hover:border-gold hover:text-gold transition-all"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a
-            href="https://github.com/kostasoiko4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-secondary border border-border flex items-center justify-center hover:border-gold hover:text-gold transition-all"
-          >
-            <Github className="w-5 h-5" />
-          </a>
-        </motion.div>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted-foreground">
+            <a href="tel:+306987802777" className={linkClass}>
+              <Phone size={15} />
+              +30 698 780 2777
+            </a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <Linkedin size={15} />
+              LinkedIn
+            </a>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <Github size={15} />
+              GitHub
+            </a>
+            <a href={CV_URL} download className={linkClass}>
+              <FileDown size={15} />
+              {t("hero.cta.secondary")}
+            </a>
+          </div>
+        </Reveal>
 
-        <div className="divider-gold mb-8" />
-
-        {/* Copyright */}
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="mt-16 flex flex-col gap-2 border-t border-border pt-6 font-mono text-xs text-muted-foreground sm:flex-row sm:justify-between">
           <p>
-            © {currentYear} Konstantinos Oikonomou. {t("footer.rights")}
+            © {currentYear} Konstantinos Oikonomou · {t("footer.location")}
           </p>
+          <p>{t("footer.built")}</p>
         </div>
       </div>
     </footer>
