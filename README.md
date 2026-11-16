@@ -34,10 +34,14 @@ src/
 public/
   images/                       hero photo (preloaded from index.html)
   og-image.jpg                  link preview image (1200x630)
-  Konstantinos-Oikonomou-CV.pdf downloadable CV: replace the file, keep the name
-  404.html                      real 404 page served by Firebase
+  Konstantinos-Oikonomou-CV.pdf     downloadable CV in English: replace the file, keep the name
+  Konstantinos-Oikonomou-CV-el.pdf  downloadable CV in Greek, linked when the site is in Greek
+  404.html                          real 404 page served by Firebase
 cv/
-  Konstantinos-Oikonomou-CV.html  source of the CV PDF
+  Konstantinos-Oikonomou-CV.html     source of the English CV PDF
+  Konstantinos-Oikonomou-CV-el.html  source of the Greek CV PDF
+  cv.css                             shared design of both, and the rules that keep them ATS-readable
+  photo.jpg                          photo used in the CV header
 ```
 
 Text content lives in `src/i18n/translations.ts`. Both languages share the same keys.
@@ -54,7 +58,7 @@ Text content lives in `src/i18n/translations.ts`. Both languages share the same 
 - **Sitemap and robots:** generated at build time by the `seo-files` plugin in `vite.config.ts`.
 - **Languages:** each language has its own URL, linked with `hreflang` in `index.html` and the sitemap.
 - **Hosting (`firebase.json`):** no catch-all rewrite, so unknown URLs return a real 404.
-  Hashed assets are cached for a year. The CV PDF is sent with `X-Robots-Tag: noindex`.
+  Hashed assets are cached for a year. Both CV PDFs are sent with `X-Robots-Tag: noindex`.
 - **Preview image:** `public/og-image.jpg`. If the title or numbers change, regenerate it at 1200x630.
 
 After deploying, submit `https://oikonomou-portfolio.web.app/sitemap.xml` in Google Search Console
@@ -62,21 +66,37 @@ and Bing Webmaster Tools.
 
 ## CV
 
-`public/Konstantinos-Oikonomou-CV.pdf` is printed from `cv/Konstantinos-Oikonomou-CV.html`.
-It is styled but still built for applicant tracking systems: one reading order (no side columns), standard
-section headings, selectable text, no tables, photo or text inside images. The header band, icons and timeline
-are decoration only. Keep it to two A4 pages, keep letter-spacing small and avoid `position` in its CSS: both
-scramble the text that parsers extract.
+There are two CVs with the same design: English and Greek. The site links to the one matching its language
+(`getCv` in `src/lib/site.ts`).
 
-To regenerate it, edit the HTML and print it with Chrome (Git Bash, from the project root):
+| PDF | Printed from |
+| --- | --- |
+| `public/Konstantinos-Oikonomou-CV.pdf` | `cv/Konstantinos-Oikonomou-CV.html` |
+| `public/Konstantinos-Oikonomou-CV-el.pdf` | `cv/Konstantinos-Oikonomou-CV-el.html` |
+
+Both use `cv/cv.css`. When the content changes, update both HTML files so the two versions say the same thing.
+
+They are styled but still built for applicant tracking systems: all text in one column with one reading order,
+standard section headings, selectable text, no tables and no text inside images. The dark spine and header band,
+the photo (`cv/photo.jpg`), the section badges and the timeline are decoration only and carry no text.
+Keep each to two A4 pages (Greek runs longer, so check it after every edit), keep letter-spacing small and
+avoid `position` on anything holding text: both scramble the text that parsers extract. Spaces between two
+tags must sit inside text, or parsers read the words glued together. The comment at the top of `cv/cv.css`
+explains these rules.
+
+To regenerate them, edit the HTML and print both with Chrome (Git Bash, from the project root):
 
 ```sh
-"C:/Program Files/Google/Chrome/Application/chrome.exe" --headless=new --no-pdf-header-footer   --virtual-time-budget=15000 --print-to-pdf="$(pwd -W)/public/Konstantinos-Oikonomou-CV.pdf"   "file:///$(pwd -W)/cv/Konstantinos-Oikonomou-CV.html"
+CHROME="C:/Program Files/Google/Chrome/Application/chrome.exe"
+for CV in Konstantinos-Oikonomou-CV Konstantinos-Oikonomou-CV-el; do
+  "$CHROME" --headless=new --no-pdf-header-footer --virtual-time-budget=15000 \
+    --print-to-pdf="$(pwd -W)/public/$CV.pdf" "file:///$(pwd -W)/cv/$CV.html"
+done
 ```
 
-Or open the HTML in Chrome, then Print > Save as PDF (A4, default margins, "Background graphics" on,
-"Headers and footers" off). Keep the file name, since the site links to it, then rebuild and deploy.
-The download links carry a fingerprint of the file (`?v=...`, computed in `vite.config.ts`), so visitors
+Or open each HTML in Chrome, then Print > Save as PDF (A4, margins "None", "Background graphics" on,
+"Headers and footers" off). Keep the file names, since the site links to them, then rebuild and deploy.
+The download links carry a fingerprint of each file (`?v=...`, computed in `vite.config.ts`), so visitors
 get the new CV right away instead of a cached copy.
 
 ## Deploy

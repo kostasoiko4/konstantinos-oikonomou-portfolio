@@ -1,0 +1,171 @@
+/*
+  Shared design of the CV, used by both language versions:
+    Konstantinos-Oikonomou-CV.html    -> public/Konstantinos-Oikonomou-CV.pdf
+    Konstantinos-Oikonomou-CV-el.html -> public/Konstantinos-Oikonomou-CV-el.pdf
+
+  Styled, but still readable by applicant tracking systems: all text sits in one column with one reading
+  order, standard section headings, real selectable text, no tables, no text inside images.
+  Everything around the text is decoration and carries no text: the dark spine and header band, the gold
+  lines, the photo, the section badges and the timeline (solid backgrounds, borders, inline SVG, one image).
+
+  How the frame works: @page has no margins, .spine is a fixed element (Chrome repeats it on every page),
+  and main.wrap carries the page margins as padding that Chrome repeats on every page (box-decoration-break).
+  The section badges and the timeline dots sit on the spine's gold hairline (--axis), pulled there with
+  negative margins.
+
+  When editing: keep letter-spacing at 0.05em or less (wider spacing is read as "S U M M A R Y"),
+  and don't position anything that holds text (positioned boxes are written out of order in the PDF);
+  .spine is positioned because it is empty.
+  No CSS or SVG gradients: Chrome turns them into blurry 72 dpi bitmaps in the PDF. Use solid colours.
+  Chrome drops a space that stands alone between two tags, so ATS read the words glued together
+  ("DOTSOFTMay 2024"). Keep every separating space inside a text node with visible characters:
+  dates start with a space (kept by white-space: pre), separators are " | ", contact items start with one.
+  Keep it to two A4 pages. To regenerate the PDF, see "CV" in README.md.
+*/
+
+:root {
+  --ink: #1b1b1d;
+  --text: #2b2b2e;
+  --muted: #5d5d63;
+  --rule: #e4ddcc;
+  --band: #141414;
+  --gold: #c9a240;        /* site gold, used on the dark spine and band */
+  --gold-text: #8f6f1f;   /* darker gold for text on white */
+  --line: 2px;            /* gold hairline along the spine and under the band (whole px: Chrome rounds borders down) */
+  --spine: 45px;          /* width of the dark spine without its hairline (about 12mm, whole px) */
+  --axis: calc(var(--spine) + var(--line) / 2);   /* centre of the hairline: badges and timeline dots sit on it */
+  --left: 19mm;           /* where the text column starts */
+}
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* Dark spine with its gold hairline, on every page. Empty, so positioning it is safe;
+   z-index -1 keeps it under the header band. */
+.spine {
+  position: fixed; top: 0; bottom: 0; left: 0; z-index: -1;
+  box-sizing: content-box; width: var(--spine);
+  background: var(--band); border-right: var(--line) solid var(--gold);
+}
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 9.2pt;
+  line-height: 1.35;
+  color: var(--text);
+  /* Ligatures off so the extracted text stays clean ("fi", "fl"...) */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+/* Greek runs about 10% longer than English; slightly tighter lines keep it on two pages */
+:lang(el) body { line-height: 1.33; }
+a { color: inherit; text-decoration: none; }
+b { font-weight: 600; color: var(--ink); }
+
+/* Page margins, repeated on every page */
+.wrap {
+  padding: 11mm 12mm 10mm var(--left);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Header band: joins the spine into an L. The gold line under it starts exactly at the spine's
+   hairline, so the two trace the inside corner. */
+.band {
+  display: flex; align-items: center; gap: 7mm;
+  padding: 8mm 12mm 8mm var(--left);
+  background: var(--band);
+  color: #d9d9d9;
+}
+.band-line {
+  height: var(--line);
+  margin: 0 0 -4mm var(--spine);   /* .wrap adds 11mm on top; this leaves 7mm under the band */
+  background: var(--gold);
+}
+.photo {
+  flex: none; display: block; width: 30mm; height: 30mm;
+  border-radius: 50%; object-fit: cover;
+  border: 1.4pt solid var(--gold);
+  box-shadow: 0 0 0 2.6pt var(--band), 0 0 0 3.2pt #6b5a2c;
+}
+.identity { flex: 1; min-width: 0; }
+h1 {
+  font-size: 24pt; font-weight: 800; line-height: 1.05;
+  letter-spacing: 0.04em; text-transform: uppercase; color: #fff;
+}
+h1 .last { color: var(--gold); }
+.headline {
+  margin-top: 3.5pt; font-size: 10.2pt; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase; color: #f1e6c8;
+}
+.contact {
+  display: grid; grid-template-columns: auto auto; justify-content: start; column-gap: 7mm;
+  margin-top: 6pt; padding-top: 5.5pt; border-top: 0.6pt solid #5c4d26;
+  font-size: 8.4pt; line-height: 1.65; color: #d4d4d4;
+}
+.contact span { white-space: nowrap; }
+.ic {
+  width: 8.4pt; height: 8.4pt; margin-right: 0.6pt; vertical-align: -1.2pt;
+  fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Sections: a gold badge on the hairline, right next to the heading, and a rule */
+section { margin-top: 9pt; }
+section:first-child { margin-top: 0; }
+h2 {
+  display: flex; align-items: center;
+  margin-bottom: 4.5pt;
+  font-size: 10.8pt; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink);
+  break-after: avoid;
+}
+h2::after { content: ""; flex: 1; height: 0.6pt; margin-left: 6pt; background: var(--rule); }
+/* The disc is drawn inside the SVG, not with border-radius: Chrome rounds box edges to whole pixels,
+   which makes small CSS circles slightly oval. An SVG keeps its circle round. */
+.badge {
+  flex: none; width: 7mm; height: 7mm;
+  /* centred on the axis; the negative top/bottom margins keep it from making the heading taller */
+  margin: -1mm calc(var(--left) - var(--axis) - 3.5mm) -1mm calc(var(--axis) - var(--left) - 3.5mm);
+}
+.badge svg {
+  display: block; width: 100%; height: 100%;
+  fill: none; stroke: var(--band); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.badge .disc { fill: var(--gold); stroke: none; }
+p + p { margin-top: 2.5pt; }
+
+.skills p { margin-top: 1.5pt; }
+
+.row { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+.dates { flex: none; font-size: 8.6pt; font-weight: 500; color: var(--muted); white-space: pre; }
+ul { margin: 2pt 0 0 12pt; }
+li { margin-top: 1pt; padding-left: 1pt; break-inside: avoid; }
+li::marker { color: var(--gold); }
+.muted { color: var(--muted); }
+.nw { white-space: nowrap; }   /* hyphenated words that wrap at the hyphen are joined by some parsers ("endto-end") */
+.sep { color: #a7a7ad; white-space: pre; }
+.link { text-decoration: underline; text-decoration-color: #cdbd93; text-decoration-thickness: 0.5pt; text-underline-offset: 1.5pt; }
+
+/* Experience timeline: the spine's hairline is the line; companies and roles are dots on it */
+.company { padding-bottom: 6pt; }
+.company:last-child { padding-bottom: 0; }
+.company > .row, .role > .row { break-after: avoid; }
+.company-name { font-size: 10.2pt; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); }
+.company-name::before {
+  content: ""; display: inline-block; vertical-align: 0.2pt;
+  width: 8.4pt; height: 8.4pt;
+  margin: 0 calc(var(--left) - var(--axis) - 4.2pt) 0 calc(var(--axis) - var(--left) - 4.2pt);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='5' fill='%23141414' stroke='%23c9a240' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.company-dates { flex: none; font-size: 8.6pt; font-weight: 600; color: var(--gold-text); white-space: pre; }
+.role { margin-top: 3pt; }
+.role-title { font-weight: 600; color: var(--ink); }
+.role > .row .role-title::before {
+  content: ""; display: inline-block; vertical-align: 1.1pt;
+  width: 4.6pt; height: 4.6pt;
+  margin: 0 calc(var(--left) - var(--axis) - 2.3pt) 0 calc(var(--axis) - var(--left) - 2.3pt);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 6'%3E%3Ccircle cx='3' cy='3' r='3' fill='%23c9a240'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.projects li { margin-top: 2pt; }
+
+.entry { margin-top: 4pt; break-inside: avoid; }
+.entry:first-of-type { margin-top: 0; }

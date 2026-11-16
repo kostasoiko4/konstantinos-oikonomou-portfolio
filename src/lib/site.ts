@@ -1,16 +1,22 @@
 /** Public address of the site, from VITE_SITE_URL in .env (no trailing slash). */
 export const SITE_URL: string = import.meta.env.VITE_SITE_URL;
 
-/** Name the downloaded CV is saved under. */
-export const CV_FILENAME = "Konstantinos-Oikonomou-CV.pdf";
-
 /**
- * The downloadable CV. To update it, replace public/Konstantinos-Oikonomou-CV.pdf
- * with the new file under the same name, then rebuild; every "Download CV" link points here.
+ * The downloadable CV, one per site language. To update one, replace its file in public/
+ * under the same name (the sources are in cv/, see README), then rebuild.
  * `v` is a fingerprint of the file computed at build time (vite.config.ts), so a new CV
  * gets a new URL and browsers can't keep serving an old cached copy.
  */
-export const CV_URL = `/${CV_FILENAME}?v=${import.meta.env.VITE_CV_VERSION}`;
+const CVS = {
+  en: { filename: "Konstantinos-Oikonomou-CV.pdf", version: import.meta.env.VITE_CV_VERSION },
+  el: { filename: "Konstantinos-Oikonomou-CV-el.pdf", version: import.meta.env.VITE_CV_EL_VERSION },
+};
+
+/** The CV for a site language (Greek for "el", English otherwise): its URL and the name it downloads as. */
+export const getCv = (language: string) => {
+  const cv = language.startsWith("el") ? CVS.el : CVS.en;
+  return { url: `/${cv.filename}?v=${cv.version}`, filename: cv.filename };
+};
 
 export const EMAIL = "kostasoikonomou4@gmail.com";
 export const GITHUB_URL = "https://github.com/kostasoiko4";

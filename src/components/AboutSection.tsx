@@ -5,10 +5,12 @@ import { Reveal, SectionHeader } from "./Section";
 
 const THESIS_URL = "https://github.com/kostasoiko4/Anomaly-Detection-in-Autonomous-Driving-Agents-Using-World-Models";
 
+/** Same order as the CV: newest first. */
 const certs = [
   { key: "pm2" },
-  { key: "react", url: "https://ude.my/UC-7d9565dd-3442-43b1-9be6-dd1d0e2597b1" },
   { key: "gdpr", url: "https://certificates.eu.sphynxlabs.net/e92b94435c354a28ae3be7778caac78c/validate" },
+  { key: "cyber", url: "https://certificates.eu.sphynxlabs.net/2e61d72084574709ae8a702c771ac609/validate" },
+  { key: "react", url: "https://ude.my/UC-7d9565dd-3442-43b1-9be6-dd1d0e2597b1" },
   { key: "ai" },
 ];
 

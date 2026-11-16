@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from "react-i18next";
 import { ArrowRight, FileDown } from "lucide-react";
-import { CV_FILENAME, CV_URL } from "@/lib/site";
+import { getCv } from "@/lib/site";
 
 const stats = [
   { value: "20+", key: "deployments" },
@@ -8,7 +8,8 @@ const stats = [
 ];
 
 export const HeroSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const cv = getCv(i18n.language);
 
   return (
     <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden">
@@ -70,7 +71,7 @@ export const HeroSection = () => {
               {t("hero.cta.primary")}
               <ArrowRight size={16} />
             </a>
-            <a href={CV_URL} download={CV_FILENAME} className="btn-secondary">
+            <a href={cv.url} download={cv.filename} className="btn-secondary">
               <FileDown size={16} />
               {t("hero.cta.secondary")}
             </a>

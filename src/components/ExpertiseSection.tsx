@@ -15,7 +15,7 @@ const groups = [
   {
     key: "other",
     icon: Layers,
-    items: ["Vue.js", "Quasar", "Angular.js", "Python", "PyTorch", "Java", "C", "C++", "OpenGL", "Prolog", "Assembly"],
+    items: ["Vue.js", "Quasar", "AngularJS", "Python", "PyTorch", "Java", "C", "C++", "OpenGL", "Prolog", "Assembly"],
   },
 ];
 

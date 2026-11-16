@@ -49,7 +49,7 @@ export const translations = {
         cases: {
           patras: {
             kind: "Team coordination · Tightest deadline",
-            title: "Interoperability Centre, Patras",
+            title: "Interoperability Center, Patras",
             challenge: "A large-scale municipal dashboard covering sensors, environment, mobility, cleaning, finances, tickets and ML predictions, built on an already complex codebase under the tightest deadline in the portfolio.",
             role: "Coordination of a section of the team and presentation of the platform to the client during review.",
             built: [
@@ -61,7 +61,7 @@ export const translations = {
           },
           vourla: {
             kind: "Full-stack · Next.js · End-to-end ownership",
-            title: "Interoperability Centre, Kamena Vourla",
+            title: "Interoperability Center, Kamena Vourla",
             challenge: "A ground-up redesign and re-architecture of the KED platform as a single full-stack application for the Municipality of Kamena Vourla, receiving sensor readings and municipal records from external providers.",
             role: "End-to-end ownership of the application: architecture, data model, API, interface and testing.",
             built: [
@@ -137,7 +137,7 @@ export const translations = {
           },
           eata: {
             title: "Athens Development (EATA)",
-            description: "Free digital tools programme for Athens businesses: applications, document submission and result tracking, with TaxisNet authentication.",
+            description: "Free digital tools program for Athens businesses: applications, document submission and result tracking, with TaxisNet authentication.",
           },
           tee: {
             title: "Technical Chamber of Greece (TEE)",
@@ -145,7 +145,7 @@ export const translations = {
           },
           academyAthens: {
             title: "Academy of Athens",
-            description: "The Academy's digital repository and the websites of two of its research centres: KENDI (Modern Greek dialects) and KEFAK (atmospheric physics and climatology).",
+            description: "The Academy's digital repository and the websites of two of its research centers: KENDI (Modern Greek dialects) and KEFAK (atmospheric physics and climatology).",
           },
           apokorona: {
             title: "Museums of Apokoronas",
@@ -196,16 +196,16 @@ export const translations = {
             title: "Mid-Senior Developer",
             period: "May 2025 - 2026",
             points: [
-              "Delivered the EKT open data platform with a fully custom interface (React and plain CSS, no UI library), setting the approach for subsequent projects.",
-              "Delivered citizen-facing municipal platforms, including a volunteering network and real-time seismic monitoring with public alerts.",
+              "Engineered the EKT open data platform with a fully custom interface (React and plain CSS, no UI library), setting the approach for subsequent projects.",
+              "Shipped citizen-facing municipal platforms, including a volunteering network and real-time seismic monitoring with public alerts.",
             ],
           },
           dotsoftMid: {
             title: "Mid-Level Developer",
             period: "May 2024 - May 2025",
             points: [
-              "Developed and maintained web applications for public bodies and organisations, including the Academy of Athens, the Region of Central Macedonia and the Ministry of Ecology and Natural Resources of Azerbaijan.",
-              "Digital repositories, research centre websites and administration panels in React, Redux Toolkit, Bootstrap and Ant Design.",
+              "Developed and maintained web applications for public bodies and organizations, including the Academy of Athens, the Region of Central Macedonia and the Ministry of Ecology and Natural Resources of Azerbaijan.",
+              "Digital repositories, research center websites and administration panels in React, Redux Toolkit, Bootstrap and Ant Design.",
             ],
           },
           weblogicLead: {
@@ -223,17 +223,17 @@ export const translations = {
             period: "Sep 2022 - May 2024",
             points: [
               "Developed a platform for hotels and travel agencies to create and manage chatbots.",
-              "Built the embeddable chat widget and its specialised components.",
+              "Built the embeddable chat widget and its specialized components.",
               "Translated business requirements into platform updates.",
             ],
           },
           instashop: {
-            title: "Full Stack Engineer",
+            title: "Full-Stack Engineer",
             period: "Jan 2022 - Mar 2022",
             summary: "Full-stack development and support, including legacy project upgrades and customer data management, within an international team.",
           },
           renvis: {
-            title: "Full Stack Intern",
+            title: "Full-Stack Intern",
             period: "Jul 2021 - Sep 2021",
             summary: "Contributed to a basketball academy management application from design through to production.",
           },
@@ -252,18 +252,18 @@ export const translations = {
       },
       about: {
         title: "About",
-        bio: "Frontend & Full-Stack Engineer based in Thessaloniki, Greece, building platforms for municipalities and public institutions at Dotsoft: smart city dashboards, citizen services, open data portals and digital repositories, in use across more than 15 Greek municipalities and organisations such as the Academy of Athens and the National Documentation Centre.",
-        background: "BSc in Computer Science from Aristotle University of Thessaloniki, specialising in Artificial Intelligence and in Robotic and Autonomous Systems, with a thesis on anomaly detection in autonomous driving agents using world models.",
+        bio: "Frontend & Full-Stack Engineer based in Thessaloniki, Greece, building platforms for municipalities and public institutions at Dotsoft: smart city dashboards, citizen services, open data portals and digital repositories, in use across more than 15 Greek municipalities and organizations such as the Academy of Athens and the National Documentation Centre.",
+        background: "BSc in Computer Science from Aristotle University of Thessaloniki, specializing in Artificial Intelligence and in Robotic and Autonomous Systems, with a thesis on anomaly detection in autonomous driving agents using world models.",
         interests: "Outside of work: music (playing and writing), martial arts, brewing and cooking, and hands-on crafts.",
         educationLabel: "Education",
         degree: "BSc in Computer Science",
-        specialisation: "Specialisations: Artificial Intelligence; Robotic and Autonomous Systems",
+        specialisation: "Specializations: Artificial Intelligence; Robotic and Autonomous Systems",
         university: "Aristotle University of Thessaloniki",
         thesisLink: "Thesis repository",
-        programmesLabel: "Business programmes",
+        programmesLabel: "Business programs",
         programmes: [
           "NGB Business Seeds, 14th Innovation and Technology Competition (2023)",
-          "OkThess! acceleration programme, 14th cycle (2021)",
+          "OkThess! acceleration program, 14th cycle (2021)",
         ],
         certificationsLabel: "Certifications",
         verify: "Verify",
@@ -271,12 +271,13 @@ export const translations = {
           pm2: { title: "PM² Agile Certification", issuer: "PM² Alliance", date: "2026" },
           react: { title: "React - The Complete Guide (incl. Next.js, Redux)", issuer: "Udemy · Academind", date: "2026" },
           gdpr: { title: "GDPR - General Data Protection Regulation", issuer: "Sphynx", date: "2026" },
+          cyber: { title: "Cyber Hygiene", issuer: "Sphynx", date: "2026" },
           ai: { title: "AI Applications in Business Marketing & Management", issuer: "GlobalCert · ESYD accredited", date: "2025" },
         },
       },
       services: {
         title: "Services",
-        subtitle: "Services for organisations with similar needs, and how a typical engagement runs.",
+        subtitle: "Services for organizations with similar needs, and how a typical engagement runs.",
         items: {
           webDev: {
             title: "Web Application Development",
@@ -542,12 +543,12 @@ export const translations = {
             ],
           },
           instashop: {
-            title: "Full Stack Engineer",
+            title: "Full-Stack Engineer",
             period: "Ιαν 2022 - Μαρ 2022",
             summary: "Full-stack ανάπτυξη και υποστήριξη, με αναβαθμίσεις legacy έργων και διαχείριση δεδομένων πελατών, σε διεθνή ομάδα.",
           },
           renvis: {
-            title: "Full Stack Intern",
+            title: "Full-Stack Intern",
             period: "Ιούλ 2021 - Σεπ 2021",
             summary: "Συμμετοχή στην ανάπτυξη εφαρμογής διαχείρισης ακαδημίας μπάσκετ, από τον σχεδιασμό έως την παραγωγή.",
           },
@@ -585,6 +586,7 @@ export const translations = {
           pm2: { title: "PM² Agile Certification", issuer: "PM² Alliance", date: "2026" },
           react: { title: "React - The Complete Guide (incl. Next.js, Redux)", issuer: "Udemy · Academind", date: "2026" },
           gdpr: { title: "GDPR - Γενικός Κανονισμός Προστασίας Δεδομένων", issuer: "Sphynx", date: "2026" },
+          cyber: { title: "Cyber Hygiene", issuer: "Sphynx", date: "2026" },
           ai: { title: "Εφαρμογές Τεχνητής Νοημοσύνης στο Business Marketing & Management", issuer: "GlobalCert · διαπίστευση ΕΣΥΔ", date: "2025" },
         },
       },

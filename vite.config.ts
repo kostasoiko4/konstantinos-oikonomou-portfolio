@@ -8,11 +8,14 @@ import { existsSync, readFileSync } from "node:fs";
 const buildDate = new Date().toISOString().slice(0, 10);
 process.env.VITE_BUILD_DATE = buildDate;
 
-// Fingerprint of the CV, appended to its download links (src/lib/site.ts) so a replaced CV gets a new URL.
-const cvFile = path.resolve(__dirname, "public/Konstantinos-Oikonomou-CV.pdf");
-process.env.VITE_CV_VERSION = existsSync(cvFile)
-  ? createHash("sha256").update(readFileSync(cvFile)).digest("hex").slice(0, 10)
-  : buildDate;
+// Fingerprints of the CVs (English and Greek), appended to their download links (src/lib/site.ts)
+// so a replaced CV gets a new URL.
+const fingerprint = (file: string) => {
+  const fullPath = path.resolve(__dirname, "public", file);
+  return existsSync(fullPath) ? createHash("sha256").update(readFileSync(fullPath)).digest("hex").slice(0, 10) : buildDate;
+};
+process.env.VITE_CV_VERSION = fingerprint("Konstantinos-Oikonomou-CV.pdf");
+process.env.VITE_CV_EL_VERSION = fingerprint("Konstantinos-Oikonomou-CV-el.pdf");
 
 /** Generates robots.txt and sitemap.xml for the configured site address at build time. */
 const seoFiles = (siteUrl: string): Plugin => ({

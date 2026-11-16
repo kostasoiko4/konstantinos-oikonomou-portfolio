@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { FileDown } from "lucide-react";
 import { Reveal, SectionHeader } from "./Section";
-import { CV_FILENAME, CV_URL } from "@/lib/site";
+import { getCv } from "@/lib/site";
 
 type Role = { key: string; stack: string[]; current?: boolean };
 
@@ -30,12 +30,13 @@ const companies: { key: string; roles: Role[] }[] = [
 
 /** Short early roles, one line each. */
 const earlierRoles = [
-  { company: "instashop", role: "instashop", stack: "Angular.js · Node.js · MongoDB" },
-  { company: "renvis", role: "renvis", stack: "React.js · Redux · Node.js · Express · PostgreSQL" },
+  { company: "instashop", role: "instashop", stack: "AngularJS · Node.js · MongoDB" },
+  { company: "renvis", role: "renvis", stack: "React.js · Redux · Node.js · Express.js · PostgreSQL" },
 ];
 
 export const ExperienceSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const cv = getCv(i18n.language);
   const list = (key: string) => t(key, { returnObjects: true }) as unknown as string[];
 
   return (
@@ -49,8 +50,8 @@ export const ExperienceSection = () => {
             subtitle={t("experience.subtitle")}
           />
           <a
-            href={CV_URL}
-            download={CV_FILENAME}
+            href={cv.url}
+            download={cv.filename}
             className="mb-12 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-gold md:mb-14"
           >
             <FileDown size={16} className="text-gold" />

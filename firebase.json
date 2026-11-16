@@ -24,7 +24,7 @@
         "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
       },
       {
-        "source": "/Konstantinos-Oikonomou-CV.pdf",
+        "source": "/Konstantinos-Oikonomou-CV*.pdf",
         "headers": [
           { "key": "X-Robots-Tag", "value": "noindex" },
           { "key": "Cache-Control", "value": "no-cache" }
